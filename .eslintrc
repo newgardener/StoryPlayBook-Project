@@ -1,0 +1,10 @@
+{
+  "plugins": ["simple-import-sort"],
+  "extends": ["react-app", "react-app-jest"],
+  "rules": {
+    "@typescript-eslint/no-duplicate-imports": [
+      "error",
+      { "includeExports": true }
+    ]
+  }
+}
