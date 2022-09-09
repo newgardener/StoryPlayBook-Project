@@ -2,9 +2,20 @@
   "plugins": ["simple-import-sort"],
   "extends": ["react-app", "react-app-jest"],
   "rules": {
-    "@typescript-eslint/no-duplicate-imports": [
+    "@typescript-eslint/no-duplicate-imports": ["error", { "includeExports": true }],
+    "sort-imports": "off",
+    "simple-import-sort/imports": [
       "error",
-      { "includeExports": true }
+      {
+        "groups": [
+          ["^\\u0000"],
+          ["^react&", "^react-dom"],
+          ["^@?\\w"],
+          ["^~"],
+          ["^."],
+          [".scss", ".svg", ".png"]
+        ]
+      }
     ]
   }
 }
