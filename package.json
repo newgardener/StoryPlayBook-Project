@@ -22,7 +22,8 @@
     "build-storybook": "build-storybook",
     "lint": "eslint 'src/**/*.{tsx,ts}'",
     "type-check": "tsc -p tsconfig.json",
-    "format": "prettier --check \"./**/*.{js,ts,tsx,scss,json,html}\""
+    "format": "prettier --check \"./**/*.{js,ts,tsx,scss,json,html}\"",
+    "generate": "node ./scripts/componentFiles.mjs"
   },
   "eslintConfig": {
     "extends": [
