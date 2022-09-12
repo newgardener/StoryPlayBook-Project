@@ -22,7 +22,7 @@ export const DotLoading = ({ className, loading = true, animation }: DotLoadingP
       case "DOT_TYPING":
         return <div className={cx("dot-typing")}></div>;
       default:
-        return <div className={cx("dot-typing")}></div>;
+        return <div className={cx("dot-flashing")}></div>;
     }
   };
 

@@ -1,3 +1,24 @@
+/*
+* Button-Related mixins
+*/
+@mixin set-default-button {
+  border: none;
+  outline: none;
+  box-shadow: none;
+
+  &:focus,
+  &:active,
+  &:hover {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
 @mixin pointer-control {
   cursor: pointer;
   user-select: none;
@@ -33,14 +54,32 @@
   }
 }
 
+/*
+* Color-Related mixins
+*/
 @mixin set-colors($color, $background-color, $border-color) {
   color: $color;
   background-color: $background-color;
   border-color: $border-color;
 }
 
+/*
+* Layout-Related mixins
+*/
 @mixin flex-layout($display, $justify-content, $align-items) {
   display: $display;
   justify-content: $justify-content;
   align-items: $align-items;
+}
+
+/*
+* Text-Related mixins
+*/
+@mixin ellipsis($max-line) {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  white-space: nowrap;
+  -webkit-line-clamp: $max-line;
+  -webkit-box-orient: vertical;
 }

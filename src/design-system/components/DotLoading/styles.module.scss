@@ -1,9 +1,14 @@
-$DOT_COLOR: #9880ff;
+$DOT_COLOR: #87929c;
 
 .dot-loading {
   display: flex;
+  position: absolute;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 
 // DOT_ELASTIC

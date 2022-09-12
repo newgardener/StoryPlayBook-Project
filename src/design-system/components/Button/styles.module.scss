@@ -1,0 +1,79 @@
+@use "../../assets/styles/mixins";
+
+$BUTTON_TEXT_BLACK: #060b11;
+$BUTTON_TEXT_WHITE: #fff;
+$BORDER_RADIUS: 30px;
+
+.custom-button-wrapper {
+  position: relative;
+  width: 100%;
+  pointer-events: none;
+}
+
+.custom-button {
+  @include mixins.flex-layout(flex, center, center);
+  @include mixins.set-default-button;
+  @include mixins.pointer-control;
+  @include mixins.before-press-dim;
+
+  box-sizing: border-box;
+  height: 60px;
+  width: auto;
+  border-radius: $BORDER_RADIUS;
+  font-weight: 400;
+  color: $BUTTON_TEXT_BLACK;
+  opacity: 1;
+
+  &:before {
+    border-radius: $BORDER_RADIUS;
+  }
+
+  &.large {
+    width: 100%;
+    font-size: 18px;
+    padding: 0 16px;
+
+    &:not(.loading, :disabled) {
+      @include mixins.button-press-effect();
+    }
+  }
+
+  &.medium {
+    height: 52px;
+    font-size: 16px;
+    padding: 0 16px;
+
+    &:not(.loading, :disabled) {
+      @include mixins.button-press-effect();
+    }
+  }
+
+  &.small {
+    height: 32px;
+    font-size: 16px;
+    padding: 0 20px;
+
+    &:not(.loading, :disabled) {
+      @include mixins.button-press-effect();
+    }
+  }
+
+  &.textWhite {
+    color: $BUTTON_TEXT_WHITE;
+  }
+
+  &.textBolded {
+    font-weight: 600;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+  }
+
+  &.loading {
+    @include mixins.after-press-dim;
+    .button-text {
+      opacity: 0;
+    }
+  }
+}
