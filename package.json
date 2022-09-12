@@ -21,7 +21,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public --modern",
     "build-storybook": "build-storybook",
-    "lint": "eslint 'src/**/*.{tsx,ts}'",
+    "lint": "eslint 'src/**/*.{tsx,ts}' --fix",
     "type-check": "tsc -p tsconfig.json",
     "format": "prettier --check \"./**/*.{js,ts,tsx,scss,json,html}\"",
     "generate": "node ./scripts/componentFiles.mjs"
@@ -63,6 +63,7 @@
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "@types/babel__core": "^7",
+    "@types/classnames": "^2.3.1",
     "@types/eslint": "^8",
     "@types/jest": "^27.0.1",
     "@types/lodash-es": "^4.17.6",

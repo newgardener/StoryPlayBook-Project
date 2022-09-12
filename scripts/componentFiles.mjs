@@ -43,29 +43,19 @@ async function createComponentFiles({ serviceName, componentName }) {
       `,
     },
     {
-      name: `${componentName}.test.tsx`,
-      content: `
-        import { screen } from '@testing-library/react';
-        import { render } from '~/shared/utils';
-        import {${componentName}} from './index';
-
-        it.todo('테스트 케이스를 작성하세요 1');
-        it.todo('테스트 케이스를 작성하세요 2');
-      `,
-    },
-    {
       name: "styles.module.scss",
       content: "",
     },
     {
       name: "index.tsx",
       content: `
+        import * as React from "react";
         import classNames from 'classnames/bind';
         import styles from './styles.module.scss';
 
         const cx = classNames.bind(styles);
 
-        type ${componentName}Props = {};
+        export interface ${componentName}Props {};
 
         export const ${componentName} = () => {
           return <></>;
