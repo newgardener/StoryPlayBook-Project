@@ -29,7 +29,7 @@ export const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
 
     return (
       <button
-        className={cx("chip", { active, className })}
+        className={cx("chip", className, { active })}
         ref={ref}
         disabled={disabled}
         {...restProps}

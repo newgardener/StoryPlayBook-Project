@@ -8,11 +8,11 @@ const cx = classNames.bind(styles);
 
 type DotAnimation = "DOT_ELASTIC" | "DOT_FLASHING" | "DOT_TYPING";
 
-export interface DotLoadingProps extends LoadingWrapperProps {
+export interface DotLoadingProps extends Omit<LoadingWrapperProps, "children"> {
   animation?: DotAnimation;
 }
 
-export const DotLoading = ({ className, loading, animation }: DotLoadingProps) => {
+export const DotLoading = ({ className, loading = true, animation }: DotLoadingProps) => {
   const Dot = () => {
     switch (animation) {
       case "DOT_ELASTIC":
@@ -27,7 +27,7 @@ export const DotLoading = ({ className, loading, animation }: DotLoadingProps) =
   };
 
   return (
-    <LoadingWrapper className={cx("dot-loading", { className })} loading={loading}>
+    <LoadingWrapper className={cx("dot-loading", className)} loading={loading}>
       {Dot()}
     </LoadingWrapper>
   );

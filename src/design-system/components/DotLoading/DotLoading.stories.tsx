@@ -7,27 +7,23 @@ export default {
   component: DotLoading,
   args: {
     animation: "DOT_ELASTIC",
-    loading: true,
   },
 } as Meta<typeof DotLoading>;
 
 export const 로딩_DOT_ELASTIC: StoryObj<typeof DotLoading> = {
   args: {
     animation: "DOT_ELASTIC",
-    loading: true,
   },
 };
 
 export const 로딩_DOT_FLASHING: StoryObj<typeof DotLoading> = {
   args: {
     animation: "DOT_FLASHING",
-    loading: true,
   },
 };
 
 export const 로딩_DOT_TYPING: StoryObj<typeof DotLoading> = {
   args: {
     animation: "DOT_TYPING",
-    loading: true,
   },
 };

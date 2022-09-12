@@ -15,7 +15,7 @@ export interface LoadingWrapperProps
 
 export const LoadingWrapper = ({ children, loading, className }: LoadingWrapperProps) => {
   return (
-    <div className={cx("loading-base", { loading, className })}>
+    <div className={cx("loading-base", className, { loading })}>
       <div className={cx("loading-wrapper")}>{children}</div>
     </div>
   );
