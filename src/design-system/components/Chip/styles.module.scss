@@ -1,0 +1,53 @@
+@use "../../assets/styles/mixins";
+
+$CHIP_DEFAULT_COLOR: #eff2f4;
+$CHIP_DEFAULT_TEXT_COLOR: rgba(#060b11, 0.6);
+
+$CHIP_ACTIVE_COLOR: #444b52;
+$CHIP_ACTIVE_TEXT_COLOR: #fff;
+
+$CHIP_DISABLED_COLOR: #fff;
+$CHIP_DISABLED_TEXT_COLOR: rgba(#060b11, 0.4);
+$CHIP_DISABLED_BORDER_COLOR: #e3e8ec;
+
+.chip {
+  box-sizing: border-box;
+  border: 1px solid;
+  height: 35px;
+  padding: 4px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+
+  @include mixins.flex-layout(inline-flex, center, center);
+  @include mixins.pointer-control;
+  @include mixins.before-press-dim;
+  @include mixins.set-colors(
+    $CHIP_DEFAULT_TEXT_COLOR,
+    $CHIP_DEFAULT_COLOR,
+    $CHIP_DEFAULT_COLOR
+  );
+
+  &[disabled] {
+    cursor: not-allowed;
+    @include mixins.set-colors(
+      $CHIP_DISABLED_TEXT_COLOR,
+      $CHIP_DISABLED_COLOR,
+      $CHIP_DISABLED_BORDER_COLOR
+    );
+  }
+
+  &.active {
+    @include mixins.set-colors(
+      $CHIP_ACTIVE_TEXT_COLOR,
+      $CHIP_ACTIVE_COLOR,
+      $CHIP_ACTIVE_COLOR
+    );
+  }
+
+  &:not(:disabled) {
+    &:active {
+      @include mixins.after-press-dim;
+      @include mixins.button-press-effect();
+    }
+  }
+}
