@@ -13,20 +13,23 @@ module.exports = {
     builder: "@storybook/builder-webpack5",
   },
   webpackFinal: async (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@assets": path.join(__dirname, "../src/design-system/assets"),
+    };
+    config.resolve.extensions.push(".ts", ".tsx");
     config.resolve.roots = [path.resolve(__dirname, "../src/")];
 
+    config.module.rules = config.module.rules.map((rule) => {
+      if (!rule.test.test(".svg")) return rule;
+      const newRule = rule;
+      newRule.test = /\.(jpg|jpeg|png|gif)$/;
+      return newRule;
+    });
     config.module.rules.push({
       test: /\.svg$/,
       include: path.resolve(__dirname, "../src/"),
-      use: [
-        "@svgr/webpack",
-        {
-          loader: "url-loader",
-          options: {
-            encoding: "utf8",
-          },
-        },
-      ],
+      use: ["@svgr/webpack", "url-loader"],
     });
 
     return config;
