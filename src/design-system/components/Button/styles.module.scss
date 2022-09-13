@@ -11,10 +11,10 @@ $BORDER_RADIUS: 30px;
 }
 
 .custom-button {
-  @include mixins.flex-layout(flex, center, center);
-  @include mixins.set-default-button;
-  @include mixins.pointer-control;
-  @include mixins.before-press-dim;
+  @include mixins.flexLayout(flex, center, center);
+  @include mixins.setDefaultButton;
+  @include mixins.pointerControl;
+  @include mixins.beforePressDim;
 
   box-sizing: border-box;
   height: 60px;
@@ -34,7 +34,7 @@ $BORDER_RADIUS: 30px;
     padding: 0 16px;
 
     &:not(.loading, :disabled) {
-      @include mixins.button-press-effect();
+      @include mixins.buttonPressEffect();
     }
   }
 
@@ -44,7 +44,7 @@ $BORDER_RADIUS: 30px;
     padding: 0 16px;
 
     &:not(.loading, :disabled) {
-      @include mixins.button-press-effect();
+      @include mixins.buttonPressEffect();
     }
   }
 
@@ -54,7 +54,7 @@ $BORDER_RADIUS: 30px;
     padding: 0 20px;
 
     &:not(.loading, :disabled) {
-      @include mixins.button-press-effect();
+      @include mixins.buttonPressEffect();
     }
   }
 
@@ -71,9 +71,22 @@ $BORDER_RADIUS: 30px;
   }
 
   &.loading {
-    @include mixins.after-press-dim;
+    @include mixins.afterPressDim;
     .button-text {
       opacity: 0;
+    }
+  }
+
+  &.iconLeft {
+    p {
+      margin-left: 5px;
+    }
+  }
+
+  &.iconRight {
+    p {
+      order: -1;
+      margin-right: 5px;
     }
   }
 }

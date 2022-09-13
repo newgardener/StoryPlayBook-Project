@@ -18,10 +18,10 @@ $CHIP_DISABLED_BORDER_COLOR: #e3e8ec;
   font-size: 14px;
   border-radius: 6px;
 
-  @include mixins.flex-layout(inline-flex, center, center);
-  @include mixins.pointer-control;
-  @include mixins.before-press-dim;
-  @include mixins.set-colors(
+  @include mixins.flexLayout(inline-flex, center, center);
+  @include mixins.pointerControl;
+  @include mixins.beforePressDim;
+  @include mixins.setColors(
     $CHIP_DEFAULT_TEXT_COLOR,
     $CHIP_DEFAULT_COLOR,
     $CHIP_DEFAULT_COLOR
@@ -29,7 +29,7 @@ $CHIP_DISABLED_BORDER_COLOR: #e3e8ec;
 
   &[disabled] {
     cursor: not-allowed;
-    @include mixins.set-colors(
+    @include mixins.setColors(
       $CHIP_DISABLED_TEXT_COLOR,
       $CHIP_DISABLED_COLOR,
       $CHIP_DISABLED_BORDER_COLOR
@@ -37,7 +37,7 @@ $CHIP_DISABLED_BORDER_COLOR: #e3e8ec;
   }
 
   &.active {
-    @include mixins.set-colors(
+    @include mixins.setColors(
       $CHIP_ACTIVE_TEXT_COLOR,
       $CHIP_ACTIVE_COLOR,
       $CHIP_ACTIVE_COLOR
@@ -46,8 +46,8 @@ $CHIP_DISABLED_BORDER_COLOR: #e3e8ec;
 
   &:not(:disabled) {
     &:active {
-      @include mixins.after-press-dim;
-      @include mixins.button-press-effect();
+      @include mixins.afterPressDim;
+      @include mixins.buttonPressEffect();
     }
   }
 }
