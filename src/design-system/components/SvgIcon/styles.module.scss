@@ -1,0 +1,33 @@
+@use "../../assets/styles/mixins";
+
+.svg-icon {
+  &.red,
+  &.red path {
+    @include mixins.setIconColorTheme("red");
+  }
+
+  &.blue,
+  &.blue path {
+    @include mixins.setIconColorTheme("blue");
+  }
+
+  &.white,
+  &.white path {
+    @include mixins.setIconColorTheme("white");
+  }
+
+  &.gray,
+  &.gray path {
+    @include mixins.setIconColorTheme("gray");
+  }
+
+  &.black,
+  &.black path {
+    @include mixins.setIconColorTheme("black");
+  }
+
+  &.disabled,
+  &.disabled path {
+    @include mixins.setIconColorTheme("disabled");
+  }
+}
