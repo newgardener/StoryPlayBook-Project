@@ -1,0 +1,11 @@
+@use "../../assets/styles/reset.scss";
+
+.typography {
+  &.bold {
+    font-weight: 600;
+  }
+
+  &.regular {
+    font-weight: 400;
+  }
+}
