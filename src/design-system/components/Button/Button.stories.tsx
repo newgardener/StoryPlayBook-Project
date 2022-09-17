@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ArrowRight } from "../../assets/images";
+import { ArrowDown } from "../../assets/images";
 import { SvgIcon } from "../SvgIcon";
 import { Button } from "./Button";
 import { BUTTON_SIZE } from "./types";
@@ -34,7 +34,7 @@ export const 버튼_SMALL: StoryObj<typeof Button> = {
 export const 버튼_ICON_WITH_CHILDREN: StoryObj<typeof Button> = {
   args: {
     size: BUTTON_SIZE.MEDIUM,
-    icon: <SvgIcon icon={ArrowRight} />,
+    icon: <SvgIcon icon={ArrowDown} />,
     children: "신정원버튼테스트",
   },
 };
@@ -42,6 +42,6 @@ export const 버튼_ICON_WITH_CHILDREN: StoryObj<typeof Button> = {
 export const 버튼_ICON_ONLY: StoryObj<typeof Button> = {
   args: {
     size: BUTTON_SIZE.MEDIUM,
-    icon: <SvgIcon icon={ArrowRight} />,
+    icon: <SvgIcon icon={ArrowDown} />,
   },
 };
