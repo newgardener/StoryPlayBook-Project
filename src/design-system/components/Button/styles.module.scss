@@ -26,6 +26,7 @@ $BORDER_RADIUS: 30px;
 
   &:before {
     border-radius: $BORDER_RADIUS;
+    z-index: -1;
   }
 
   &.large {

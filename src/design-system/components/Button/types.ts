@@ -7,5 +7,4 @@ export const BUTTON_SIZE = {
 export const BUTTON_GROUP = {
   ONE_TO_ONE: "1:1",
   STACKED: "stacked",
-  FLOATED: "floated",
 } as const;
