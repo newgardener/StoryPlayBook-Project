@@ -1,7 +1,17 @@
+@use "colors";
+@use "functions";
+
+/*
+* Common mixins
+*/
+@mixin setProperty($property, $property-value) {
+  #{$property}: $property-value;
+}
+
 /*
 * Button-Related mixins
 */
-@mixin set-default-button {
+@mixin setDefaultButton {
   border: none;
   outline: none;
   box-shadow: none;
@@ -19,12 +29,12 @@
   }
 }
 
-@mixin pointer-control {
+@mixin pointerControl {
   cursor: pointer;
   user-select: none;
 }
 
-@mixin before-press-dim {
+@mixin beforePressDim {
   position: relative;
 
   &:before {
@@ -41,13 +51,13 @@
   }
 }
 
-@mixin after-press-dim {
+@mixin afterPressDim {
   &:before {
     opacity: 1;
   }
 }
 
-@mixin button-press-effect($scale: 0.95) {
+@mixin buttonPressEffect($scale: 0.95) {
   transition: transform 0.5s cubic-bezier(0.39, 1.5, 0.41, 0.71);
   &:active {
     transform: scale($scale);
@@ -57,7 +67,7 @@
 /*
 * Color-Related mixins
 */
-@mixin set-colors($color, $background-color, $border-color) {
+@mixin setColors($color, $background-color, $border-color) {
   color: $color;
   background-color: $background-color;
   border-color: $border-color;
@@ -66,7 +76,7 @@
 /*
 * Layout-Related mixins
 */
-@mixin flex-layout($display, $justify-content, $align-items) {
+@mixin flexLayout($display, $justify-content, $align-items) {
   display: $display;
   justify-content: $justify-content;
   align-items: $align-items;
@@ -82,4 +92,12 @@
   white-space: nowrap;
   -webkit-line-clamp: $max-line;
   -webkit-box-orient: vertical;
+}
+
+/*
+* Color-Related mixins
+*/
+@mixin setIconColorTheme($theme) {
+  $themeColor: functions.getIconColorTheme($theme);
+  @include setProperty("fill", $themeColor);
 }

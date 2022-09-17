@@ -1,0 +1,9 @@
+@use "colors";
+
+@function getIconColorTheme($theme) {
+  $themeColor: map-get(colors.$icon-color, $theme);
+  @if $themeColor {
+    @return $themeColor;
+  }
+  @error "No Matched IconColorTheme Found";
+}

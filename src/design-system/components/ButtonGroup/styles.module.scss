@@ -1,0 +1,26 @@
+.button-group {
+  padding: 0 16px;
+
+  &.row {
+    .button-group-item {
+      + .button-group-item {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  &.column {
+    .button-group-item {
+      + .button-group-item {
+        margin-top: 8px;
+      }
+    }
+  }
+
+  .button-group-item {
+    display: flex;
+    > :first-child {
+      flex: 1 0 0;
+    }
+  }
+}

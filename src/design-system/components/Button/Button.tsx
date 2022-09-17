@@ -11,7 +11,7 @@ import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
-type ButtonSize = typeof BUTTON_SIZE[keyof typeof BUTTON_SIZE];
+export type ButtonSize = typeof BUTTON_SIZE[keyof typeof BUTTON_SIZE];
 
 export interface ButtonProps extends ButtonBaseProps {
   size: ButtonSize;

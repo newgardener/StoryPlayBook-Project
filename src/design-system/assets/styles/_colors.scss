@@ -1,0 +1,12 @@
+$icon-color: () !default;
+$icon-color: map-merge(
+  (
+    "red": #ff3c3c,
+    "blue": #008dff,
+    "white": #ffffff,
+    "gray": #444b52,
+    "black": #191c20,
+    "disabled": rgba(#060b11, 0.24),
+  ),
+  $icon-color
+);
