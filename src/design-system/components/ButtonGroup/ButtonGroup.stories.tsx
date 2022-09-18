@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ButtonGroup, type ButtonGroupProps } from "./index";
 import { type ButtonSize, BUTTON_GROUP, BUTTON_SIZE } from "../Button";
 import { Button } from "../Button";
+import { type ButtonGroupProps,ButtonGroup } from "./index";
 
 export default {
   title: "디자인시스템/컴포넌트/ButtonGroup",

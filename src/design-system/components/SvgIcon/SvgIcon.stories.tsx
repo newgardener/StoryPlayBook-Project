@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { ArrowDown } from "../../assets/images";
-import { SvgIcon, type SvgIconProps } from "./index";
+import { type SvgIconProps,SvgIcon } from "./index";
 
 export default {
   title: "디자인시스템/컴포넌트/SvgIcon",
