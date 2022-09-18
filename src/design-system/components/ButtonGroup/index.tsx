@@ -2,9 +2,10 @@ import * as React from "react";
 
 import classNames from "classnames/bind";
 
-import styles from "./styles.module.scss";
-import { Group, GroupProps } from "../Group";
 import { type ButtonSize, BUTTON_GROUP, BUTTON_SIZE } from "../Button";
+import { Group, GroupProps } from "../Group";
+
+import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 

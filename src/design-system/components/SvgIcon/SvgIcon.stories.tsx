@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ArrowRight } from "../../assets/images";
-import { SvgIcon, type SvgIconProps } from "./index";
+import { ArrowDown } from "../../assets/images";
+import { type SvgIconProps,SvgIcon } from "./index";
 
 export default {
   title: "디자인시스템/컴포넌트/SvgIcon",
   component: SvgIcon,
   args: {
-    icon: ArrowRight,
+    icon: ArrowDown,
   },
 } as Meta<SvgIconProps>;
 

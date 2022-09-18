@@ -1,0 +1,60 @@
+$DIVIDER_COLOR: rgba(#87929c, 0.1);
+$marginSize: 18px;
+$width: calc(100% - $marginSize * 2);
+$maxWidth: 375px;
+
+.product-list {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  border-radius: 16px;
+  margin: 0 auto 24px;
+  padding: 24px;
+
+  &.cardType {
+    width: $width;
+    max-width: $maxWidth;
+    padding: 20px 18px 20px;
+    box-shadow: 0 4px 40px rgba(62, 100, 255, 0.1);
+    background-color: #fff;
+  }
+}
+
+.product-header {
+  margin: 0 0 24px;
+  p {
+    padding-bottom: 5px;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin-bottom: 18px;
+  }
+}
+
+.item:not(:last-child) {
+  > .col {
+    padding-bottom: 18px;
+    border-bottom: 1px solid;
+    border-color: $DIVIDER_COLOR;
+  }
+}
+
+.thumbnail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.col {
+  width: 100%;
+}
