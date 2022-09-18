@@ -14,6 +14,7 @@ export default {
         productId: 1,
         priority: 1,
         name: "베럴아이 무드등",
+        description: "베럴아이 무드등은 잠을 잘 때 키고 자기 좋은 무드등입니다.",
         image: {
           defaultImage: {
             icon: Shark,
@@ -25,7 +26,7 @@ export default {
       {
         productId: 2,
         priority: 2,
-        name: "베럴아이 잠옷세트",
+        name: "베럴아이 잠옷세트\n남녀노소 입기 좋은 아이템",
         image: {
           defaultImage: {
             icon: Shark,
