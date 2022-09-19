@@ -64,18 +64,28 @@ export const ProductList = ({
               <SvgIcon icon={product.image.defaultImage.icon} />
             </div>
             <div className={cx("col")}>
-              <FlexLayout
-                className={cx("row")}
-                direction="row"
-                justifyContent="between"
-                alignItems="center"
-              >
-                <Typography className={cx("name")} tag="p" weight="bold" fontSize={16}>
-                  {product.name}
+              <FlexLayout className={cx("row")} direction="column" alignItems="start">
+                <FlexLayout
+                  className={cx("content")}
+                  direction="row"
+                  justifyContent="between"
+                  alignItems="center"
+                >
+                  <Typography className={cx("name")} tag="p" weight="bold" fontSize={14}>
+                    {product.name}
+                  </Typography>
+                  <Button size="small" backgroundColor="#eff2f4" textColor="black">
+                    알아보기
+                  </Button>
+                </FlexLayout>
+                <Typography
+                  className={cx("description")}
+                  tag="span"
+                  fontSize={12}
+                  color="#444b52"
+                >
+                  {product.description}
                 </Typography>
-                <Button size="small" backgroundColor="#eff2f4" textColor="black">
-                  알아보기
-                </Button>
               </FlexLayout>
             </div>
           </li>
