@@ -40,17 +40,15 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
     const getBadgeContent = React.useCallback(() => {
       switch (type) {
         case "count":
-          const countToDisplay = trimCount(count);
           return children ? (
             <span className={cx("type-count", labelColor, { visible })}>
-              {countToDisplay}
+              {trimCount(count)}
             </span>
           ) : null;
         case "label":
-          const labelToDisplay = trimLabel(label);
           return label ? (
             <span className={cx("type-label", labelColor, size, { visible })}>
-              {labelToDisplay}
+              {trimLabel(label)}
             </span>
           ) : null;
         default:

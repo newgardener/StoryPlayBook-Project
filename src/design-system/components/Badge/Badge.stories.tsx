@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Badge, type BadgeProps } from "./index";
+import { type BadgeProps,Badge } from "./index";
 
 export default {
   title: "디자인시스템/컴포넌트/Badge",
