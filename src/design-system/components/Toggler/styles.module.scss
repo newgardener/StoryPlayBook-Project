@@ -1,0 +1,50 @@
+$BORDER_RADIUS: 16px;
+
+.toggle-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+  border-radius: $BORDER_RADIUS;
+  padding: 1px;
+  background: rgba(0, 0, 0, 0.15);
+
+  input {
+    appearance: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: $BORDER_RADIUS;
+  }
+
+  span {
+    display: inline-block;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    transition: all 300ms ease-out;
+    color: rgba(51, 51, 51, 0.6);
+    padding: 7px 15px;
+  }
+
+  input:not(:checked) ~ span:first-of-type,
+  input:checked ~ span:last-of-type {
+    border-radius: $BORDER_RADIUS;
+    background: #f6f9fc;
+    box-shadow: rgb(0 0 0 / 20%) 0 0 2px;
+    color: #333;
+    padding: 7px 15px;
+  }
+
+  input:checked ~ span:last-of-type,
+  input:not(:checked) ~ span:first-of-type {
+    color: rgba(51, 51, 51, 0.6);
+    padding: 7px 15px;
+  }
+}
