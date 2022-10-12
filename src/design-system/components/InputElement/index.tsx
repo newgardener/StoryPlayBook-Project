@@ -6,14 +6,14 @@ import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
-interface InputBaseProps
+export interface InputBaseProps
   extends React.PropsWithoutRef<
     React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
   > {
   className?: string;
 }
 
-const InputBase = React.forwardRef<HTMLInputElement, InputBaseProps>(
+export const InputBase = React.forwardRef<HTMLInputElement, InputBaseProps>(
   ({ className, ...restProps }, ref) => {
     return (
       <input className={cx("input-element", className)} ref={ref} {...restProps}></input>
