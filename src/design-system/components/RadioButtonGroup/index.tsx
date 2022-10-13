@@ -16,14 +16,14 @@ export interface RadioButtonGroupProps {
   className?: string;
 }
 
-type RadioButtonGroupContext = {
+type RadioButtonGroupContextType = {
   name: string;
   value: string;
   checkedRadioButtonValue: string;
   setRadioButtonValue: (value: string) => void;
 };
 
-const initialContextState: RadioButtonGroupContext = {
+const initialContextState: RadioButtonGroupContextType = {
   name: "",
   value: "",
   checkedRadioButtonValue: "",
@@ -31,7 +31,7 @@ const initialContextState: RadioButtonGroupContext = {
 };
 
 const RadioButtonGroupContext =
-  React.createContext<RadioButtonGroupContext>(initialContextState);
+  React.createContext<RadioButtonGroupContextType>(initialContextState);
 
 export const RadioButtonGroup = React.forwardRef<HTMLDivElement, RadioButtonGroupProps>(
   ({ name, onChange, children, className, ...restProps }, ref) => {
@@ -50,10 +50,11 @@ export const RadioButtonGroup = React.forwardRef<HTMLDivElement, RadioButtonGrou
 
       return radioButtons.map((radioButton: React.ReactElement, index: number) => {
         const value = radioButton.props.value ?? String(index);
+
         return React.cloneElement(radioButton, {
           key: radioButton.key || index,
-          name,
-          value,
+          name: name,
+          value: value,
           checkedRadioButtonValue,
           setRadioButtonValue,
         });
@@ -77,11 +78,11 @@ export const RadioButtonRowGroup = React.forwardRef<
   HTMLDivElement,
   Omit<GroupProps, "direction">
 >(({ children, className, ...restProps }, ref) => {
-  const { name, value, checkedRadioButtonValue, setRadioButtonValue } = React.useContext(
-    RadioButtonGroupContext,
-  );
+  const { name, value, checkedRadioButtonValue, setRadioButtonValue, ...rowRestProps } =
+    restProps as RadioButtonGroupContextType;
+
   return (
-    <Group className={cx("row-radio-button")} direction="row" ref={ref} {...restProps}>
+    <Group className={cx("row-radio-button")} direction="row" ref={ref} {...rowRestProps}>
       <RadioButtonGroupContext.Provider
         value={{ name, value, checkedRadioButtonValue, setRadioButtonValue }}
       >
@@ -91,46 +92,51 @@ export const RadioButtonRowGroup = React.forwardRef<
   );
 });
 
-export const RadioButtonInGroup = React.forwardRef<HTMLDivElement, RadioButtonProps>(
-  ({ checked, inputProps, inputRef, onChange, ...restProps }, ref) => {
-    const { name, value, checkedRadioButtonValue, setRadioButtonValue } =
-      React.useContext(RadioButtonGroupContext);
-    const radioButtonRef = React.useRef<HTMLInputElement | null>(null);
+export const RadioButtonInGroup = ({
+  checked,
+  inputProps,
+  inputRef,
+  onChange,
+  ...restProps
+}: RadioButtonProps) => {
+  const { name, value, checkedRadioButtonValue, setRadioButtonValue } = React.useContext(
+    RadioButtonGroupContext,
+  );
+  const radioButtonRef = React.useRef<HTMLInputElement | null>(null);
 
-    const currentRadioButtonValue = radioButtonRef.current?.value || value;
+  const currentRadioButtonValue = radioButtonRef.current?.value || value;
 
-    const handleOnChange = React.useCallback(
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        onChange && onChange(event);
-      },
-      [],
-    );
+  const handleOnChange = React.useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onChange && onChange(event);
+    },
+    [],
+  );
 
-    const setInputRef = React.useCallback((node: HTMLInputElement | null) => {
-      node && (radioButtonRef.current = node);
-      if (inputRef) {
-        if (typeof inputRef === "function") {
-          inputRef(node);
-        } else {
-          node && ((inputRef as React.MutableRefObject<HTMLElement>).current = node);
-        }
+  const setInputRef = React.useCallback((node: HTMLInputElement | null) => {
+    node && (radioButtonRef.current = node);
+    if (inputRef) {
+      if (typeof inputRef === "function") {
+        inputRef(node);
+      } else {
+        node && ((inputRef as React.MutableRefObject<HTMLElement>).current = node);
       }
-    }, []);
+    }
+  }, []);
 
-    React.useEffect(() => {
-      if (isBoolean(checked) && checked) {
-        setRadioButtonValue(currentRadioButtonValue);
-      }
-    }, [checked, setRadioButtonValue, currentRadioButtonValue]);
+  React.useEffect(() => {
+    if (isBoolean(checked) && checked) {
+      setRadioButtonValue(currentRadioButtonValue);
+    }
+  }, [checked, setRadioButtonValue, currentRadioButtonValue]);
 
-    return (
-      <RadioButton
-        checked={currentRadioButtonValue === checkedRadioButtonValue}
-        onChange={handleOnChange}
-        inputProps={{ name, value, ...inputProps }}
-        inputRef={setInputRef}
-        {...restProps}
-      />
-    );
-  },
-);
+  return (
+    <RadioButton
+      checked={currentRadioButtonValue === checkedRadioButtonValue}
+      onChange={handleOnChange}
+      inputProps={{ name, value, ...inputProps }}
+      inputRef={setInputRef}
+      {...restProps}
+    />
+  );
+};
