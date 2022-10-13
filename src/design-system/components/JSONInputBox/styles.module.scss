@@ -1,0 +1,100 @@
+$HIGHLIGHT_COLOR: rgb(30, 167, 253);
+$BRACELET_COLOR: rgb(102, 102, 102);
+$DATA_COLOR: #333333;
+
+.json-array-node,
+.json-data-node {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 3px;
+  font-size: 14px;
+}
+
+.json-data-node {
+  margin-left: 15px;
+}
+
+.json-data-node:hover {
+  border-radius: 3px;
+  background-color: rgba($HIGHLIGHT_COLOR, 0.1);
+  transition: transform 0.5s ease-out;
+}
+
+.rotate-to-right {
+  transform: rotate(-90deg);
+}
+
+.key-data {
+  font-size: 14px;
+  padding-left: 3px;
+  color: $HIGHLIGHT_COLOR;
+}
+
+.bracelet {
+  margin: 3px 8px;
+  cursor: text;
+  color: $BRACELET_COLOR;
+
+  &.value {
+    margin-left: 30px;
+  }
+}
+
+.value-node-list {
+  margin-left: 35px;
+  padding: 5px 0;
+  font-size: 14px;
+  color: $DATA_COLOR;
+
+  input {
+    background: #f6f9fc;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    padding: 2px;
+    margin-right: 3px;
+  }
+  input[name="key"] {
+    width: 80px;
+  }
+  input[name="value"] {
+    width: 120px;
+  }
+  button[name="save"],
+  button[name="cancel"] {
+    margin-right: 3px;
+    color: #666666;
+  }
+}
+
+.value-node {
+  display: flex;
+  align-items: center;
+
+  .name {
+    color: $HIGHLIGHT_COLOR;
+  }
+
+  .value {
+    padding: 3px;
+    margin-right: 8px;
+    &:hover {
+      border-radius: 5px;
+      border: 1px solid rgba($BRACELET_COLOR, 0.3);
+    }
+  }
+
+  button {
+    padding: 3px;
+    height: auto;
+  }
+  input {
+    width: auto;
+    height: auto;
+    margin-right: 5px;
+  }
+}
+
+svg {
+  cursor: pointer;
+}

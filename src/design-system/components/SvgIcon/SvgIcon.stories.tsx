@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ArrowDown } from "../../assets/images";
-import { type SvgIconProps,SvgIcon } from "./index";
+import { ArrowDown, ArrowToggleDown } from "../../assets/images";
+import { type SvgIconProps, SvgIcon } from "./index";
 
 export default {
   title: "디자인시스템/컴포넌트/SvgIcon",
@@ -38,5 +38,12 @@ export const 아이콘_gray: StoryObj<SvgIconProps> = {
 export const 아이콘_disabled: StoryObj<SvgIconProps> = {
   args: {
     theme: "disabled",
+  },
+};
+
+export const 아이콘_ArrowToggleDown: StoryObj<SvgIconProps> = {
+  args: {
+    icon: ArrowToggleDown,
+    theme: "gray",
   },
 };
