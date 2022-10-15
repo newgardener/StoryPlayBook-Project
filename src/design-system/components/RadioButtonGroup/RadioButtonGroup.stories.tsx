@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import {
+  type RadioButtonGroupProps,
   RadioButtonGroup,
   RadioButtonInGroup,
   RadioButtonRowGroup,
-  type RadioButtonGroupProps,
 } from "./index";
 
 export default {

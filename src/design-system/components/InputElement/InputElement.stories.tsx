@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { InputElement, type InputElementProps } from "./index";
+import { type InputElementProps,InputElement } from "./index";
 
 export default {
   title: "디자인시스템/컴포넌트/InputElement",

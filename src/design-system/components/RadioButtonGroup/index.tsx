@@ -1,11 +1,12 @@
 import * as React from "react";
 
 import classNames from "classnames/bind";
+import { isBoolean } from "lodash-es";
+
+import { type GroupProps, Group } from "../Group";
+import { type RadioButtonProps, RadioButton } from "../RadioButton";
 
 import styles from "./styles.module.scss";
-import { Group, type GroupProps } from "../Group";
-import { RadioButton, type RadioButtonProps } from "../RadioButton";
-import { isBoolean } from "lodash-es";
 
 const cx = classNames.bind(styles);
 
@@ -27,7 +28,7 @@ const initialContextState: RadioButtonGroupContextType = {
   name: "",
   value: "",
   checkedRadioButtonValue: "",
-  setRadioButtonValue: () => {},
+  setRadioButtonValue: () => undefined,
 };
 
 const RadioButtonGroupContext =

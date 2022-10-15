@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { RadioButton, type RadioButtonProps } from "./index";
+import { type RadioButtonProps,RadioButton } from "./index";
 
 export default {
   title: "디자인시스템/컴포넌트/RadioButton",
