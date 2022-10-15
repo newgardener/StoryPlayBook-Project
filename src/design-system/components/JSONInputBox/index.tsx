@@ -1,13 +1,14 @@
 import * as React from "react";
 
 import classNames from "classnames/bind";
+import { debounce, omit } from "lodash-es";
+
+import { ArrowToggleDown, Minus, Plus } from "../../assets/images";
+import { convertArrayToObject } from "../../assets/utils";
+import { FlexLayout } from "../Layout";
+import { SvgIcon } from "../SvgIcon";
 
 import styles from "./styles.module.scss";
-import { SvgIcon } from "../SvgIcon";
-import { ArrowToggleDown, Minus, Plus } from "../../assets/images";
-import { debounce, omit } from "lodash-es";
-import { FlexLayout } from "../Layout";
-import { convertArrayToObject } from "../../assets/utils";
 
 const cx = classNames.bind(styles);
 

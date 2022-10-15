@@ -1,11 +1,12 @@
 import * as React from "react";
 
 import classNames from "classnames/bind";
+import { isBoolean } from "lodash-es";
+
+import { isStringValue } from "../../assets/utils";
+import { type InputElementProps,InputBase } from "../InputElement";
 
 import styles from "./styles.module.scss";
-import { InputBase, type InputElementProps } from "../InputElement";
-import { isBoolean } from "lodash-es";
-import { isStringValue } from "../../assets/utils";
 
 const cx = classNames.bind(styles);
 
