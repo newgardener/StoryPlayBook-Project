@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { type ButtonSize, BUTTON_GROUP, BUTTON_SIZE } from "../Button";
 import { Button } from "../Button";
+
 import { type ButtonGroupProps,ButtonGroup } from "./index";
 
 export default {

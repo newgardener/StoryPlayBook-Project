@@ -13,12 +13,18 @@
       "error",
       {
         "groups": [
+          // Packages `react` related packages come first.
+          ["^react", "^@?\\w"],
+          // Internal packages.
+          ["^(@|components)(/.*|$)"],
+          // Side effect imports.
           ["^\\u0000"],
-          ["^react$", "^react-dom"],
-          ["^@?\\w"],
-          ["^~"],
-          ["^."],
-          [".scss", ".svg", ".png"]
+          // Parent imports. Put `..` last.
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+          // Other relative imports. Put same-folder imports and `.` last.
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+          // Style imports.
+          ["^.+\\.?(css)$"]
         ]
       }
     ],
@@ -46,7 +52,6 @@
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:react-hooks/recommended",
-        "plugin:jsx-a11y/recommended",
         "prettier"
       ]
     }

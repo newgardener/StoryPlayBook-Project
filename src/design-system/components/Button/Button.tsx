@@ -1,9 +1,9 @@
 import * as React from "react";
-
 import classNames from "classnames/bind";
 
 import { isStringValue } from "../../assets/utils";
 import { DotLoading } from "../DotLoading";
+
 import { ButtonBase, ButtonBaseProps } from "./ButtonBase";
 import { BUTTON_SIZE } from "./types";
 

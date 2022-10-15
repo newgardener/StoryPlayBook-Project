@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Skeleton } from "../Skeleton";
+
 import { SkeletonToggler } from "./index";
 
 export default {
