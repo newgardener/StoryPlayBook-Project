@@ -12,7 +12,12 @@ export interface DotLoadingProps extends Omit<LoadingWrapperProps, "children"> {
   animation?: DotAnimation;
 }
 
-export const DotLoading = ({ className, loading = true, animation }: DotLoadingProps) => {
+export const DotLoading = ({
+  className,
+  loading = true,
+  fullSize = false,
+  animation,
+}: DotLoadingProps) => {
   const Dot = () => {
     switch (animation) {
       case "DOT_ELASTIC":
@@ -27,7 +32,11 @@ export const DotLoading = ({ className, loading = true, animation }: DotLoadingP
   };
 
   return (
-    <LoadingWrapper className={cx("dot-loading", className)} loading={loading}>
+    <LoadingWrapper
+      className={cx("dot-loading", className)}
+      loading={loading}
+      fullSize={fullSize}
+    >
       {Dot()}
     </LoadingWrapper>
   );

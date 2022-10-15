@@ -35,7 +35,7 @@ export const defaultComponentProps: Record<string, object> = {
       },
     ],
   },
-  DotLoading: { animation: "DOT_ELASTIC" },
+  DotLoading: { animation: "DOT_FLASHING" },
   FoldingMotion: { title: "FoldingMotion 제목", content: "FoldingMotion 컨텐츠" },
   AccordionCard: {
     title: "테스트 아코디언 컴포넌트",

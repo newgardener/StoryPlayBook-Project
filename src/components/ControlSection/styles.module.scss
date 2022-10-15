@@ -28,11 +28,14 @@
 }
 
 .component-control-section {
+  position: relative;
   display: flex;
+  box-sizing: border-box;
   padding: 24px;
 }
 
 .component-render-panel {
+  position: relative;
   flex: 1.5;
   background-color: transparent;
   border-radius: 1rem;
@@ -41,5 +44,6 @@
 }
 
 .component-control-panel {
+  position: relative;
   flex: 1;
 }
