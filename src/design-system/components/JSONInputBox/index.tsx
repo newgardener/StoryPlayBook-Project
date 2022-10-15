@@ -52,49 +52,32 @@ export const JSONInputBox = ({ propsName = "data", defaultData }: JSONInputBoxPr
 
   return (
     <JSONDataContext.Provider value={{ JSONInputData, setJSONInputData }}>
-      <button
-        className={cx("json-array-node")}
-        onClick={() => setIsCollapsed((currentValue) => !currentValue)}
-      >
-        <SvgIcon
-          className={cx({ "rotate-to-right": !isCollapsed })}
-          icon={ArrowToggleDown}
-          theme="gray"
-          size={10}
-        />
-        <span className={cx("key-data")}>{propsName} :</span>
-        <span className={cx("bracelet", { collapsed: isCollapsed })}>
-          {isCollapsed ? "[" : `[...] ${keyCount} items`}
-        </span>
-        {isCollapsed ? (
+      <div className={cx("json-input-box")}>
+        <button
+          className={cx("json-array-node")}
+          onClick={() => setIsCollapsed((currentValue) => !currentValue)}
+        >
           <SvgIcon
-            icon={Plus}
+            className={cx({ "rotate-to-right": !isCollapsed })}
+            icon={ArrowToggleDown}
             theme="gray"
             size={10}
-            onClick={(e) => {
-              e.stopPropagation();
-              onClickPlusIcon();
-            }}
           />
-        ) : (
-          <SvgIcon
-            icon={Minus}
-            theme="gray"
-            size={10}
-            onClick={(e) => {
-              e.stopPropagation();
-              onClickMinusIcon();
-            }}
-          />
-        )}
-      </button>
-      {isCollapsed && (
-        <>
-          {Object.entries(JSONInputData).map(([key, value]) => (
-            <EditableJSONData keyData={key} valueData={value} />
-          ))}
-          <FlexLayout direction="row">
-            <p className={cx("bracelet")}>{"]"}</p>
+          <span className={cx("key-data")}>{propsName} :</span>
+          <span className={cx("bracelet", { collapsed: isCollapsed })}>
+            {isCollapsed ? "[" : `[...] ${keyCount} items`}
+          </span>
+          {isCollapsed ? (
+            <SvgIcon
+              icon={Plus}
+              theme="gray"
+              size={10}
+              onClick={(e) => {
+                e.stopPropagation();
+                onClickPlusIcon();
+              }}
+            />
+          ) : (
             <SvgIcon
               icon={Minus}
               theme="gray"
@@ -104,9 +87,28 @@ export const JSONInputBox = ({ propsName = "data", defaultData }: JSONInputBoxPr
                 onClickMinusIcon();
               }}
             />
-          </FlexLayout>
-        </>
-      )}
+          )}
+        </button>
+        {isCollapsed && (
+          <>
+            {Object.entries(JSONInputData).map(([key, value]) => (
+              <EditableJSONData keyData={key} valueData={value} />
+            ))}
+            <FlexLayout direction="row">
+              <p className={cx("bracelet")}>{"]"}</p>
+              <SvgIcon
+                icon={Minus}
+                theme="gray"
+                size={10}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onClickMinusIcon();
+                }}
+              />
+            </FlexLayout>
+          </>
+        )}
+      </div>
     </JSONDataContext.Provider>
   );
 };
