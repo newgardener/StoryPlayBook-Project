@@ -1,0 +1,45 @@
+.component-chip-list {
+}
+
+.chips-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  & ::-webkit-scrollbar-track,
+  & ::-webkit-scrollbar,
+  & ::-webkit-scrollbar-thumb {
+    width: 0;
+    height: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+.component-chip {
+  padding: 12px 24px 24px;
+  overflow: hidden;
+  dt {
+    display: inline;
+    button {
+      margin: 12px 8px 0 0;
+    }
+  }
+}
+
+.component-control-section {
+  display: flex;
+  padding: 24px;
+}
+
+.component-render-panel {
+  flex: 1.5;
+  background-color: transparent;
+  border-radius: 1rem;
+  height: 500px;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.component-control-panel {
+  flex: 1;
+}

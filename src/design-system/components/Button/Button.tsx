@@ -14,7 +14,7 @@ const cx = classNames.bind(styles);
 export type ButtonSize = typeof BUTTON_SIZE[keyof typeof BUTTON_SIZE];
 
 export interface ButtonProps extends ButtonBaseProps {
-  size: ButtonSize;
+  size?: ButtonSize;
   backgroundColor?: string;
   textColor?: "white" | "black";
   textBolded?: boolean;
@@ -23,7 +23,7 @@ export interface ButtonProps extends ButtonBaseProps {
 }
 
 export const Button = ({
-  size,
+  size = "medium",
   backgroundColor,
   textColor = "white",
   textBolded = true,

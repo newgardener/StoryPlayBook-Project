@@ -16,14 +16,6 @@ type Content = {
   description?: string;
 };
 
-export type AccordionCardProps = {
-  title: string;
-  subtitle?: string;
-  contents: Content[];
-  showLimit?: number;
-  className?: string;
-};
-
 type AccordionCardItemProps = {
   index: number;
   content: Content;
@@ -48,6 +40,14 @@ const AccordionCardItem = ({ index, content }: AccordionCardItemProps) => {
       </FlexLayout>
     </FlexLayout>
   );
+};
+
+export type AccordionCardProps = {
+  title: string;
+  subtitle?: string;
+  contents: Content[];
+  showLimit?: number;
+  className?: string;
 };
 
 export const AccordionCard = ({

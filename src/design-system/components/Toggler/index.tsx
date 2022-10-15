@@ -6,11 +6,12 @@ import styles from "./styles.module.scss";
 const cx = classNames.bind(styles);
 
 type TogglerProps = {
+  checked?: boolean;
   labels?: [string, string];
 };
 
-export const Toggler = ({ labels }: TogglerProps) => {
-  const [isChecked, setIsChecked] = React.useState(false);
+export const Toggler = ({ checked = false, labels }: TogglerProps) => {
+  const [isChecked, setIsChecked] = React.useState(checked);
 
   const toggleButton = () => setIsChecked(!isChecked);
 
