@@ -73,6 +73,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-simple-import-sort", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:8.0.0"],\
             ["framer-motion", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:7.3.5"],\
             ["lodash-es", "npm:4.17.21"],\
+            ["postcss-normalize", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:10.0.1"],\
             ["prettier", "npm:2.7.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:18.2.0"],\
@@ -23164,6 +23165,23 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
+        ["virtual:a2955cea6c48c6554030bd2b094a6bdeb8f666e84a5ed801519047504fd71b0c5ac14bbd8590ffba6d60998f91129d94508910589f9fc3f7d1d2a25d047125bb#npm:4.0.0", {\
+          "packageLocation": "./.yarn/__virtual__/postcss-browser-comments-virtual-f9be0f476d/0/cache/postcss-browser-comments-npm-4.0.0-ad08f76065-9b8e709483.zip/node_modules/postcss-browser-comments/",\
+          "packageDependencies": [\
+            ["postcss-browser-comments", "virtual:a2955cea6c48c6554030bd2b094a6bdeb8f666e84a5ed801519047504fd71b0c5ac14bbd8590ffba6d60998f91129d94508910589f9fc3f7d1d2a25d047125bb#npm:4.0.0"],\
+            ["@types/browserslist", null],\
+            ["@types/postcss", null],\
+            ["browserslist", null],\
+            ["postcss", null]\
+          ],\
+          "packagePeers": [\
+            "@types/browserslist",\
+            "@types/postcss",\
+            "browserslist",\
+            "postcss"\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["virtual:fca1db3b66d6591663f303d699b1895d37bbfbf9964be2edcf551ca71f519b594ff2cff8144236dbb46da4850f5567bd11988efc0ed9e722db3783edc3393194#npm:4.0.0", {\
           "packageLocation": "./.yarn/__virtual__/postcss-browser-comments-virtual-906230f046/0/cache/postcss-browser-comments-npm-4.0.0-ad08f76065-9b8e709483.zip/node_modules/postcss-browser-comments/",\
           "packageDependencies": [\
@@ -24283,6 +24301,26 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["browserslist", "npm:4.21.3"],\
             ["postcss", "npm:8.4.16"],\
             ["postcss-browser-comments", "virtual:fca1db3b66d6591663f303d699b1895d37bbfbf9964be2edcf551ca71f519b594ff2cff8144236dbb46da4850f5567bd11988efc0ed9e722db3783edc3393194#npm:4.0.0"],\
+            ["sanitize.css", "npm:13.0.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/browserslist",\
+            "@types/postcss",\
+            "browserslist",\
+            "postcss"\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:10.0.1", {\
+          "packageLocation": "./.yarn/__virtual__/postcss-normalize-virtual-a2955cea6c/0/cache/postcss-normalize-npm-10.0.1-f2f3d55340-af67ade84e.zip/node_modules/postcss-normalize/",\
+          "packageDependencies": [\
+            ["postcss-normalize", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:10.0.1"],\
+            ["@csstools/normalize.css", "npm:12.0.0"],\
+            ["@types/browserslist", null],\
+            ["@types/postcss", null],\
+            ["browserslist", null],\
+            ["postcss", null],\
+            ["postcss-browser-comments", "virtual:a2955cea6c48c6554030bd2b094a6bdeb8f666e84a5ed801519047504fd71b0c5ac14bbd8590ffba6d60998f91129d94508910589f9fc3f7d1d2a25d047125bb#npm:4.0.0"],\
             ["sanitize.css", "npm:13.0.0"]\
           ],\
           "packagePeers": [\
@@ -27286,6 +27324,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-simple-import-sort", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:8.0.0"],\
             ["framer-motion", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:7.3.5"],\
             ["lodash-es", "npm:4.17.21"],\
+            ["postcss-normalize", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:10.0.1"],\
             ["prettier", "npm:2.7.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:18.2.0"],\
