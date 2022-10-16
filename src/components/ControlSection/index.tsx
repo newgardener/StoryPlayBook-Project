@@ -1,7 +1,11 @@
 import * as React from "react";
 import classNames from "classnames/bind";
 
-import { componentList, defaultComponentProps } from "../../constants";
+import {
+  componentList,
+  componentPropsTypeMap,
+  defaultComponentProps,
+} from "../../constants";
 import {
   type AccordionCardProps,
   type BadgeProps,
@@ -20,11 +24,16 @@ import {
   Chip,
   DotLoading,
   FoldingMotion,
+  InputElement,
   JSONInputBox,
   ProductList,
+  RadioButtonGroup,
+  RadioButtonInGroup,
+  RadioButtonRowGroup,
   Toggler,
   Typography,
 } from "../../design-system/components";
+import { InputType } from "../../types";
 
 import styles from "./styles.module.scss";
 
@@ -154,5 +163,72 @@ type ComponentControlPanelProps = {
 };
 
 const ComponentControlPanel = ({ componentName }: ComponentControlPanelProps) => {
-  return <div className={cx("component-control-panel")}></div>;
+  const componentInputForm = componentPropsTypeMap[componentName];
+
+  const getInputFieldComponentByType = ({
+    fieldName,
+    fieldType,
+    fieldDefaultValue,
+  }: {
+    fieldName: string;
+    fieldType: string;
+    fieldDefaultValue: string | string[] | object;
+  }) => {
+    switch (fieldType) {
+      case InputType.JSON:
+        return <JSONInputBox defaultData={fieldDefaultValue as object} />;
+      case InputType.TEXT:
+      case InputType.NUMBER:
+        return <InputElement value={fieldDefaultValue as string} />;
+      case InputType.RADIO:
+        return (
+          <RadioButtonGroup name={fieldName}>
+            {(fieldDefaultValue as string[]).map((option) => (
+              <RadioButtonRowGroup>
+                <RadioButtonInGroup>{option}</RadioButtonInGroup>
+              </RadioButtonRowGroup>
+            ))}
+          </RadioButtonGroup>
+        );
+      case InputType.TOGGLE:
+        return <Toggler />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className={cx("component-control-panel")}>
+      <table>
+        <colgroup>
+          <col width="25%" />
+          <col width="75%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">
+              <span>Name</span>
+            </th>
+            <th scope="col">
+              <span>Control</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.entries(componentInputForm).map(([fieldName, fieldInfo]) => (
+            <tr>
+              <td>{fieldName}</td>
+              <td>
+                {getInputFieldComponentByType({
+                  fieldName,
+                  fieldType: fieldInfo[0],
+                  fieldDefaultValue: fieldInfo[1],
+                })}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };

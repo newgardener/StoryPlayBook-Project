@@ -1,4 +1,19 @@
+import * as React from "react";
+
 import { Shark } from "./design-system/assets/images";
+import {
+  AccordionCard,
+  Badge,
+  Button,
+  ButtonGroup,
+  Chip,
+  DotLoading,
+  FoldingMotion,
+  JSONInputBox,
+  ProductList,
+  Toggler,
+  Typography,
+} from "./design-system/components";
 import { BUTTON_GROUP, BUTTON_SIZE } from "./design-system/components/Button/types";
 import { InputType } from "./types";
 
@@ -17,12 +32,24 @@ export const componentList: string[] = [
 ];
 
 export const defaultComponentProps: Record<string, object> = {
-  Typography: { tag: "p", fontSize: 24, weight: "bold" },
-  Badge: { type: "count", count: 85, visible: true, children: "뱃지 테스트 텍스트" },
-  Button: { children: "테스트 버튼", size: BUTTON_SIZE.MEDIUM },
-  ButtonGroup: { buttonGroupType: BUTTON_GROUP.STACKED, buttonSize: BUTTON_SIZE.MEDIUM },
-  Chip: { label: "테스트용 촉촉한 쿠키칩" },
-  Toggler: {},
+  Typography: { tag: "p", fontSize: 24, weight: "bold" } as React.ComponentProps<
+    typeof Typography
+  >,
+  Badge: {
+    type: "count",
+    count: 85,
+    visible: true,
+    children: "뱃지 테스트 텍스트",
+  } as React.ComponentProps<typeof Badge>,
+  Button: { children: "테스트 버튼", size: BUTTON_SIZE.MEDIUM } as React.ComponentProps<
+    typeof Button
+  >,
+  ButtonGroup: {
+    buttonGroupType: BUTTON_GROUP.STACKED,
+    buttonSize: BUTTON_SIZE.MEDIUM,
+  } as React.ComponentProps<typeof ButtonGroup>,
+  Chip: { label: "테스트용 촉촉한 쿠키칩" } as React.ComponentProps<typeof Chip>,
+  Toggler: {} as React.ComponentProps<typeof Toggler>,
   JSONInputBox: {
     propsName: "contents",
     defaultData: [
@@ -35,9 +62,12 @@ export const defaultComponentProps: Record<string, object> = {
         description: "베럴아이2 is a deep sea creature",
       },
     ],
-  },
-  DotLoading: { animation: "DOT_FLASHING" },
-  FoldingMotion: { title: "FoldingMotion 제목", content: "FoldingMotion 컨텐츠" },
+  } as React.ComponentProps<typeof JSONInputBox>,
+  DotLoading: { animation: "DOT_FLASHING" } as React.ComponentProps<typeof DotLoading>,
+  FoldingMotion: {
+    title: "FoldingMotion 제목",
+    content: "FoldingMotion 컨텐츠",
+  } as React.ComponentProps<typeof FoldingMotion>,
   AccordionCard: {
     title: "테스트 아코디언 컴포넌트",
     subtitle: "서브 아코디언",
@@ -53,7 +83,7 @@ export const defaultComponentProps: Record<string, object> = {
       },
     ],
     showLimit: 1,
-  },
+  } as React.ComponentProps<typeof AccordionCard>,
   ProductList: {
     title: "베럴아이에 대해 알아보기",
     subtitle: "우리들의 친구",
@@ -84,32 +114,23 @@ export const defaultComponentProps: Record<string, object> = {
         badgeStatus: "NONE",
       },
     ],
-  },
+  } as React.ComponentProps<typeof ProductList>,
 };
 
-export const componentPropsMap = {
+export const componentPropsTypeMap: Record<string, object> = {
   Typography: {
-    color: [InputType.JSON, "#191c20"],
+    color: [InputType.TEXT, "#191c20"],
     weight: [InputType.RADIO, ["bold", "regular"]],
     fontSize: [InputType.NUMBER, 24],
     lineHeight: [InputType.NUMBER, 20],
     tag: [
       InputType.RADIO,
-      "h1",
-      "h2",
-      "h3",
-      "h4",
-      "h5",
-      "p",
-      "div",
-      "span",
-      "strong",
-      "b",
+      ["h1", "h2", "h3", "h4", "h5", "p", "div", "span", "strong", "b"],
     ],
     children: [InputType.TEXT, "테스트용 Typography"],
   },
   Badge: {
-    type: [InputType.RADIO, "count"],
+    type: [InputType.RADIO, ["count", "label"]],
     count: [InputType.NUMBER, 85],
     label: [InputType.TEXT, ""],
     labelColor: [InputType.RADIO, ["red", "blue", "gray"]],
