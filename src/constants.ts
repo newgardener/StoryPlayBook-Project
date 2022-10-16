@@ -1,5 +1,6 @@
 import { Shark } from "./design-system/assets/images";
 import { BUTTON_GROUP, BUTTON_SIZE } from "./design-system/components/Button/types";
+import { InputType } from "./types";
 
 export const componentList: string[] = [
   "Typography",
@@ -83,5 +84,55 @@ export const defaultComponentProps: Record<string, object> = {
         badgeStatus: "NONE",
       },
     ],
+  },
+};
+
+export const componentPropsMap = {
+  Typography: {
+    color: [InputType.JSON, "#191c20"],
+    weight: [InputType.RADIO, ["bold", "regular"]],
+    fontSize: [InputType.NUMBER, 24],
+    lineHeight: [InputType.NUMBER, 20],
+    tag: [
+      InputType.RADIO,
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "p",
+      "div",
+      "span",
+      "strong",
+      "b",
+    ],
+    children: [InputType.TEXT, "테스트용 Typography"],
+  },
+  Badge: {
+    type: [InputType.RADIO, "count"],
+    count: [InputType.NUMBER, 85],
+    label: [InputType.TEXT, ""],
+    labelColor: [InputType.RADIO, ["red", "blue", "gray"]],
+    size: [InputType.RADIO, ["small", "large"]],
+    children: [InputType.TEXT, "뱃지 테스트 텍스트"],
+  },
+  Button: {
+    size: [InputType.RADIO, ["large", "medium", "small"]],
+    backgroundColor: [InputType.TEXT, "#568203"],
+    textColor: [InputType.RADIO, ["white", "black"]],
+    textBolded: [InputType.TOGGLE, false],
+    isLoading: [InputType.TOGGLE, false],
+    children: [InputType.TEXT, "테스트 버튼"],
+  },
+  ButtonGroup: {
+    buttonGroupType: [InputType.RADIO, ["1:1", "stacked"]],
+    buttonSize: [InputType.RADIO, ["large", "medium", "small"]],
+  },
+  Chip: {
+    active: [InputType.TOGGLE, false],
+    label: [InputType.TEXT, "테스트용 촉촉한 쿠키칩"],
+  },
+  Toggler: {
+    checked: [InputType.TOGGLE, false],
   },
 };

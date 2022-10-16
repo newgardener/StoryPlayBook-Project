@@ -50,7 +50,7 @@ export const ControlSection = () => {
       </div>
       <dd className={cx("component-control-section")}>
         <ComponentRenderPanel componentName={componentList[activeIndex]} />
-        <ComponentControlPanel />
+        <ComponentControlPanel componentName={componentList[activeIndex]} />
       </dd>
     </dl>
   );
@@ -149,6 +149,10 @@ const ComponentRenderPanel = ({ componentName }: ComponentRenderPanelProps) => {
   );
 };
 
-const ComponentControlPanel = () => {
+type ComponentControlPanelProps = {
+  componentName: string;
+};
+
+const ComponentControlPanel = ({ componentName }: ComponentControlPanelProps) => {
   return <div className={cx("component-control-panel")}></div>;
 };

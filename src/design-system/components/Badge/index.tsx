@@ -22,7 +22,10 @@ export interface BadgeProps
 const LABEL_MAX_LENGTH = 10;
 
 export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
-  ({ type, count, label, labelColor, size, visible, className, children }, ref) => {
+  (
+    { type, count, label, labelColor, size, visible = true, className, children },
+    ref,
+  ) => {
     const trimCount = React.useCallback((count: number | undefined) => {
       if (!count) return String(0);
       return count > 99 ? "99+" : String(count);

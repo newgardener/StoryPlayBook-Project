@@ -20,6 +20,7 @@ export const Toggler = ({ checked = false, labels }: TogglerProps) => {
       <input
         className={cx("toggle-switch")}
         type="checkbox"
+        value={isChecked ? 1 : 0}
         checked={isChecked}
         onChange={toggleButton}
       />

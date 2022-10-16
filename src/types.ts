@@ -1,0 +1,7 @@
+export const InputType = {
+  JSON: "JSON_INPUT",
+  TEXT: "TEXT_INPUT",
+  NUMBER: "NUMBER_INPUT",
+  RADIO: "RADIO_BUTTON_INPUT",
+  TOGGLE: "BOOLEAN_INPUT",
+} as const;
