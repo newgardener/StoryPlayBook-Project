@@ -84,7 +84,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["type-fest", "npm:2.19.0"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\
             ["url-loader", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:4.1.1"],\
-            ["web-vitals", "npm:2.1.4"]\
+            ["web-vitals", "npm:2.1.4"],\
+            ["zod", "npm:3.19.1"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -27387,7 +27388,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["type-fest", "npm:2.19.0"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\
             ["url-loader", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:4.1.1"],\
-            ["web-vitals", "npm:2.1.4"]\
+            ["web-vitals", "npm:2.1.4"],\
+            ["zod", "npm:3.19.1"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -30277,6 +30279,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/yocto-queue-npm-0.1.0-c6c9a7db29-f77b3d8d00.zip/node_modules/yocto-queue/",\
           "packageDependencies": [\
             ["yocto-queue", "npm:0.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["zod", [\
+        ["npm:3.19.1", {\
+          "packageLocation": "./.yarn/cache/zod-npm-3.19.1-5084a5dfc9-56e420ea58.zip/node_modules/zod/",\
+          "packageDependencies": [\
+            ["zod", "npm:3.19.1"]\
           ],\
           "linkType": "HARD"\
         }]\
