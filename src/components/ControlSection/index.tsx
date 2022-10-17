@@ -47,7 +47,7 @@ export const ControlSection = () => {
       <div className={cx("chips-container")}>
         <div className={cx("component-chip")}>
           {componentList.map((componentName, index) => (
-            <dt key={index}>
+            <dt key={`chip-${index}`}>
               <Chip
                 label={componentName}
                 active={activeIndex === index}
@@ -172,19 +172,21 @@ const ComponentControlPanel = ({ componentName }: ComponentControlPanelProps) =>
   }: {
     fieldName: string;
     fieldType: string;
-    fieldDefaultValue: string | string[] | object;
+    fieldDefaultValue: string | string[] | object | object[];
   }) => {
+    console.log(fieldDefaultValue);
+
     switch (fieldType) {
       case InputType.JSON:
-        return <JSONInputBox defaultData={fieldDefaultValue as object} />;
+        return <JSONInputBox defaultData={fieldDefaultValue as object | object[]} />;
       case InputType.TEXT:
       case InputType.NUMBER:
         return <InputElement value={fieldDefaultValue as string} />;
       case InputType.RADIO:
         return (
           <RadioButtonGroup name={fieldName}>
-            {(fieldDefaultValue as string[]).map((option) => (
-              <RadioButtonRowGroup>
+            {(fieldDefaultValue as string[]).map((option, index) => (
+              <RadioButtonRowGroup key={`button-row-group-${index}`}>
                 <RadioButtonInGroup>{option}</RadioButtonInGroup>
               </RadioButtonRowGroup>
             ))}
@@ -215,17 +217,19 @@ const ComponentControlPanel = ({ componentName }: ComponentControlPanelProps) =>
           </tr>
         </thead>
         <tbody>
-          {Object.entries(componentInputForm).map(([fieldName, fieldInfo]) => (
-            <tr>
-              <td>{fieldName}</td>
-              <td>
-                {getInputFieldComponentByType({
-                  fieldName,
-                  fieldType: fieldInfo[0],
-                  fieldDefaultValue: fieldInfo[1],
-                })}
-              </td>
-            </tr>
+          {Object.entries(componentInputForm).map(([fieldName, fieldInfo], index) => (
+            <React.Fragment key={`field-${index}`}>
+              <tr>
+                <td>{fieldName}</td>
+                <td>
+                  {getInputFieldComponentByType({
+                    fieldName,
+                    fieldType: fieldInfo[0],
+                    fieldDefaultValue: fieldInfo[1],
+                  })}
+                </td>
+              </tr>
+            </React.Fragment>
           ))}
         </tbody>
       </table>

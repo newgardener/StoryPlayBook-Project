@@ -1,6 +1,7 @@
 import * as React from "react";
 import classNames from "classnames/bind";
 
+import { Shark } from "../../assets/images";
 import { Button } from "../Button";
 import { FlexLayout } from "../Layout";
 import { SvgIcon } from "../SvgIcon";
@@ -11,7 +12,7 @@ import styles from "./styles.module.scss";
 const cx = classNames.bind(styles);
 
 type ProductImage = {
-  icon: React.FC<React.SVGProps<SVGSVGElement>>;
+  icon?: React.FC<React.SVGProps<SVGSVGElement>>;
   backgroundColor: string;
 };
 
@@ -20,12 +21,8 @@ type Product = {
   priority: number;
   name: string;
   description?: string;
-  image: {
-    defaultImage: ProductImage;
-    darkModeImage?: ProductImage;
-  };
   badgeStatus?: "NONE" | "NEW";
-};
+} & ProductImage;
 
 export type ProductListProps = {
   title: string;
@@ -59,9 +56,9 @@ export const ProductList = ({
           <li key={product.productId} className={cx("item")}>
             <div
               className={cx("thumbnail")}
-              style={{ background: product.image.defaultImage.backgroundColor }}
+              style={{ background: product.backgroundColor }}
             >
-              <SvgIcon icon={product.image.defaultImage.icon} />
+              <SvgIcon icon={product.icon ?? Shark} />
             </div>
             <div className={cx("col")}>
               <FlexLayout className={cx("row")} direction="column" alignItems="start">

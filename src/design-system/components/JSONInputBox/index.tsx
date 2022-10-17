@@ -16,27 +16,25 @@ export interface JSONInputBoxProps {
   defaultData: object | object[];
 }
 
-const JSONDataContext = React.createContext(
-  {} as {
-    JSONInputData: object;
-    setJSONInputData: React.Dispatch<
-      React.SetStateAction<{
-        [key: number]: object;
-      }>
-    >;
-  },
-);
-
 export const JSONInputBox = ({ propsName = "data", defaultData }: JSONInputBoxProps) => {
   const [isCollapsed, setIsCollapsed] = React.useState(true);
   const [JSONInputData, setJSONInputData] = React.useState(
     convertArrayToObject(defaultData),
   );
 
+  console.log(convertArrayToObject(defaultData));
+
   const keyCount = Object.keys(defaultData).length;
 
   if (!Array.isArray(defaultData)) {
-    return <EditableJSONData keyData={propsName} valueData={defaultData} />;
+    return (
+      <EditableJSONData
+        keyData={propsName}
+        valueData={defaultData}
+        JSONInputData={JSONInputData}
+        setJSONInputData={setJSONInputData}
+      />
+    );
   }
 
   const onClickPlusIcon = () => {
@@ -51,33 +49,55 @@ export const JSONInputBox = ({ propsName = "data", defaultData }: JSONInputBoxPr
   };
 
   return (
-    <JSONDataContext.Provider value={{ JSONInputData, setJSONInputData }}>
-      <div className={cx("json-input-box")}>
-        <button
-          className={cx("json-array-node")}
-          onClick={() => setIsCollapsed((currentValue) => !currentValue)}
-        >
+    <div className={cx("json-input-box")}>
+      <button
+        className={cx("json-array-node")}
+        onClick={() => setIsCollapsed((currentValue) => !currentValue)}
+      >
+        <SvgIcon
+          className={cx({ "rotate-to-right": !isCollapsed })}
+          icon={ArrowToggleDown}
+          theme="gray"
+          size={10}
+        />
+        <span className={cx("key-data")}>{propsName} :</span>
+        <span className={cx("bracelet", { collapsed: isCollapsed })}>
+          {isCollapsed ? "[" : `[...] ${keyCount} items`}
+        </span>
+        {isCollapsed ? (
           <SvgIcon
-            className={cx({ "rotate-to-right": !isCollapsed })}
-            icon={ArrowToggleDown}
+            icon={Plus}
             theme="gray"
             size={10}
+            onClick={(e) => {
+              e.stopPropagation();
+              onClickPlusIcon();
+            }}
           />
-          <span className={cx("key-data")}>{propsName} :</span>
-          <span className={cx("bracelet", { collapsed: isCollapsed })}>
-            {isCollapsed ? "[" : `[...] ${keyCount} items`}
-          </span>
-          {isCollapsed ? (
-            <SvgIcon
-              icon={Plus}
-              theme="gray"
-              size={10}
-              onClick={(e) => {
-                e.stopPropagation();
-                onClickPlusIcon();
-              }}
+        ) : (
+          <SvgIcon
+            icon={Minus}
+            theme="gray"
+            size={10}
+            onClick={(e) => {
+              e.stopPropagation();
+              onClickMinusIcon();
+            }}
+          />
+        )}
+      </button>
+      {isCollapsed && (
+        <>
+          {Object.entries(JSONInputData).map(([key, value]) => (
+            <EditableJSONData
+              keyData={key}
+              valueData={value}
+              JSONInputData={JSONInputData}
+              setJSONInputData={setJSONInputData}
             />
-          ) : (
+          ))}
+          <FlexLayout direction="row">
+            <p className={cx("bracelet")}>{"]"}</p>
             <SvgIcon
               icon={Minus}
               theme="gray"
@@ -87,43 +107,34 @@ export const JSONInputBox = ({ propsName = "data", defaultData }: JSONInputBoxPr
                 onClickMinusIcon();
               }}
             />
-          )}
-        </button>
-        {isCollapsed && (
-          <>
-            {Object.entries(JSONInputData).map(([key, value]) => (
-              <EditableJSONData keyData={key} valueData={value} />
-            ))}
-            <FlexLayout direction="row">
-              <p className={cx("bracelet")}>{"]"}</p>
-              <SvgIcon
-                icon={Minus}
-                theme="gray"
-                size={10}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onClickMinusIcon();
-                }}
-              />
-            </FlexLayout>
-          </>
-        )}
-      </div>
-    </JSONDataContext.Provider>
+          </FlexLayout>
+        </>
+      )}
+    </div>
   );
 };
 
 type EditableJSONDataProps = {
   keyData: number | string;
   valueData: object;
+  JSONInputData: object;
+  setJSONInputData: React.Dispatch<
+    React.SetStateAction<{
+      [key: number]: object;
+    }>
+  >;
 };
 
-const EditableJSONData = ({ keyData, valueData }: EditableJSONDataProps) => {
+const EditableJSONData = ({
+  keyData,
+  valueData,
+  JSONInputData,
+  setJSONInputData,
+}: EditableJSONDataProps) => {
   const [isCollapsed, setIsCollapsed] = React.useState(false);
   const [isEditable, setIsEditable] = React.useState(false);
 
   const [JSONData, setJSONData] = React.useState(valueData);
-  const { JSONInputData, setJSONInputData } = React.useContext(JSONDataContext);
 
   const inputKeyRef = React.useRef<HTMLInputElement>(null);
   const inputValueRef = React.useRef<HTMLInputElement>(null);
