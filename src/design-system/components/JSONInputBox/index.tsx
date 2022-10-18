@@ -3,7 +3,6 @@ import classNames from "classnames/bind";
 import { debounce, omit } from "lodash-es";
 
 import { ArrowToggleDown, Minus, Plus } from "../../assets/images";
-import { convertArrayToObject } from "../../assets/utils";
 import { FlexLayout } from "../Layout";
 import { SvgIcon } from "../SvgIcon";
 
