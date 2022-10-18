@@ -24,7 +24,7 @@ export const JSONInputBox = ({ propsName = "data", defaultData }: JSONInputBoxPr
   React.useEffect(() => {
     setIsCollapsed(true);
     setJSONInputData(defaultData);
-  }, [defaultData, JSONInputData]);
+  }, [defaultData]);
 
   if (!Array.isArray(JSONInputData)) {
     return (
