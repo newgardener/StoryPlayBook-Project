@@ -37,8 +37,12 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
 
     const getButtonArray = React.useCallback(() => {
       const buttonArray = React.Children.toArray(children);
-      return buttonArray.map((child: React.ReactNode) =>
-        child ? <div className={cx("button-group-item")}>{child}</div> : null,
+      return buttonArray.map((child: React.ReactNode, index) =>
+        child ? (
+          <div className={cx("button-group-item")} key={index}>
+            {child}
+          </div>
+        ) : null,
       );
     }, []);
 
