@@ -17,16 +17,17 @@ export interface JSONInputBoxProps {
 }
 
 export const JSONInputBox = ({ propsName = "data", defaultData }: JSONInputBoxProps) => {
-  const [isCollapsed, setIsCollapsed] = React.useState(true);
-  const [JSONInputData, setJSONInputData] = React.useState(
-    convertArrayToObject(defaultData),
-  );
-
-  console.log(convertArrayToObject(defaultData));
+  const [isCollapsed, setIsCollapsed] = React.useState(false);
+  const [JSONInputData, setJSONInputData] = React.useState({});
 
   const keyCount = Object.keys(defaultData).length;
 
-  if (!Array.isArray(defaultData)) {
+  React.useEffect(() => {
+    setIsCollapsed(true);
+    setJSONInputData(defaultData);
+  }, [defaultData, JSONInputData]);
+
+  if (!Array.isArray(JSONInputData)) {
     return (
       <EditableJSONData
         keyData={propsName}
@@ -88,8 +89,9 @@ export const JSONInputBox = ({ propsName = "data", defaultData }: JSONInputBoxPr
       </button>
       {isCollapsed && (
         <>
-          {Object.entries(JSONInputData).map(([key, value]) => (
+          {Object.entries(JSONInputData).map(([key, value], i) => (
             <EditableJSONData
+              key={i}
               keyData={key}
               valueData={value}
               JSONInputData={JSONInputData}
@@ -187,6 +189,15 @@ const EditableJSONData = ({
     };
     updateJSONInputData(updatedJSONData);
   };
+
+  React.useEffect(() => {
+    setJSONData(valueData);
+
+    return () => {
+      setIsCollapsed(false);
+      setIsEditable(false);
+    };
+  }, [valueData]);
 
   return (
     <React.Fragment>

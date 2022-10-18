@@ -174,11 +174,14 @@ const ComponentControlPanel = ({ componentName }: ComponentControlPanelProps) =>
     fieldType: string;
     fieldDefaultValue: string | string[] | object | object[];
   }) => {
-    console.log(fieldDefaultValue);
-
     switch (fieldType) {
       case InputType.JSON:
-        return <JSONInputBox defaultData={fieldDefaultValue as object | object[]} />;
+        return (
+          <JSONInputBox
+            propsName={fieldName}
+            defaultData={fieldDefaultValue as object | object[]}
+          />
+        );
       case InputType.TEXT:
       case InputType.NUMBER:
         return <InputElement value={fieldDefaultValue as string} />;

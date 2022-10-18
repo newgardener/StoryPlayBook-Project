@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { Shark } from "../../assets/images";
 
 import { JSONInputBox } from "./index";
