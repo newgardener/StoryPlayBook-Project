@@ -1,9 +1,9 @@
 import * as React from "react";
-
 import classNames from "classnames/bind";
 
 import { isStringValue } from "../../assets/utils";
 import { DotLoading } from "../DotLoading";
+
 import { ButtonBase, ButtonBaseProps } from "./ButtonBase";
 import { BUTTON_SIZE } from "./types";
 
@@ -14,7 +14,7 @@ const cx = classNames.bind(styles);
 export type ButtonSize = typeof BUTTON_SIZE[keyof typeof BUTTON_SIZE];
 
 export interface ButtonProps extends ButtonBaseProps {
-  size: ButtonSize;
+  size?: ButtonSize;
   backgroundColor?: string;
   textColor?: "white" | "black";
   textBolded?: boolean;
@@ -23,7 +23,7 @@ export interface ButtonProps extends ButtonBaseProps {
 }
 
 export const Button = ({
-  size,
+  size = "medium",
   backgroundColor,
   textColor = "white",
   textBolded = true,

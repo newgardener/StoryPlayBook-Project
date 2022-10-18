@@ -12,8 +12,15 @@
 
   &.loading {
     display: flex;
-    .loading-wrapper {
-      position: absolute;
+
+    &.fullSize {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+
+      .loading-wrapper {
+        position: absolute;
+      }
     }
   }
 }

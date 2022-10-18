@@ -9,10 +9,3 @@ export const isStringValue = (value: unknown) => {
 export const isBoolean = (value: unknown) => {
   return value === true || value === false;
 };
-
-export const convertArrayToObject = (data: object | object[]) => {
-  if (!Array.isArray(data)) return { 0: data };
-  const convertedObject = {} as { [key: number]: object };
-  data.forEach((d, i) => (convertedObject[i] = d));
-  return convertedObject;
-};

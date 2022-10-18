@@ -1,0 +1,59 @@
+@import "normalize.css";
+
+body {
+  overflow-x: hidden;
+
+  font-family: system-ui, Roboto, AppleSDGothicNeo, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-color: #fff;
+
+  &:before {
+    background: none;
+    content: "";
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: -1;
+  }
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  background-color: transparent;
+  cursor: pointer;
+  appearance: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+hr {
+  margin: 0;
+}
+
+:focus {
+  outline: none;
+}
+
+.blind {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  border: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import classNames from "classnames/bind";
 import { motion } from "framer-motion";
 
@@ -15,14 +14,6 @@ const cx = classNames.bind(styles);
 type Content = {
   name: string;
   description?: string;
-};
-
-export type AccordionCardProps = {
-  title: string;
-  subtitle?: string;
-  contents: Content[];
-  showLimit?: number;
-  className?: string;
 };
 
 type AccordionCardItemProps = {
@@ -49,6 +40,14 @@ const AccordionCardItem = ({ index, content }: AccordionCardItemProps) => {
       </FlexLayout>
     </FlexLayout>
   );
+};
+
+export type AccordionCardProps = {
+  title: string;
+  subtitle?: string;
+  contents: Content[];
+  showLimit?: number;
+  className?: string;
 };
 
 export const AccordionCard = ({

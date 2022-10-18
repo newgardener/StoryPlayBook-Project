@@ -1,10 +1,8 @@
 import * as React from "react";
-
 import classNames from "classnames/bind";
 import { debounce, omit } from "lodash-es";
 
 import { ArrowToggleDown, Minus, Plus } from "../../assets/images";
-import { convertArrayToObject } from "../../assets/utils";
 import { FlexLayout } from "../Layout";
 import { SvgIcon } from "../SvgIcon";
 
@@ -17,27 +15,26 @@ export interface JSONInputBoxProps {
   defaultData: object | object[];
 }
 
-const JSONDataContext = React.createContext(
-  {} as {
-    JSONInputData: object;
-    setJSONInputData: React.Dispatch<
-      React.SetStateAction<{
-        [key: number]: object;
-      }>
-    >;
-  },
-);
-
 export const JSONInputBox = ({ propsName = "data", defaultData }: JSONInputBoxProps) => {
-  const [isCollapsed, setIsCollapsed] = React.useState(true);
-  const [JSONInputData, setJSONInputData] = React.useState(
-    convertArrayToObject(defaultData),
-  );
+  const [isCollapsed, setIsCollapsed] = React.useState(false);
+  const [JSONInputData, setJSONInputData] = React.useState({});
 
   const keyCount = Object.keys(defaultData).length;
 
-  if (!Array.isArray(defaultData)) {
-    return <EditableJSONData keyData={propsName} valueData={defaultData} />;
+  React.useEffect(() => {
+    setIsCollapsed(true);
+    setJSONInputData(defaultData);
+  }, [defaultData]);
+
+  if (!Array.isArray(JSONInputData)) {
+    return (
+      <EditableJSONData
+        keyData={propsName}
+        valueData={defaultData}
+        JSONInputData={JSONInputData}
+        setJSONInputData={setJSONInputData}
+      />
+    );
   }
 
   const onClickPlusIcon = () => {
@@ -52,7 +49,7 @@ export const JSONInputBox = ({ propsName = "data", defaultData }: JSONInputBoxPr
   };
 
   return (
-    <JSONDataContext.Provider value={{ JSONInputData, setJSONInputData }}>
+    <div className={cx("json-input-box")}>
       <button
         className={cx("json-array-node")}
         onClick={() => setIsCollapsed((currentValue) => !currentValue)}
@@ -91,8 +88,14 @@ export const JSONInputBox = ({ propsName = "data", defaultData }: JSONInputBoxPr
       </button>
       {isCollapsed && (
         <>
-          {Object.entries(JSONInputData).map(([key, value]) => (
-            <EditableJSONData keyData={key} valueData={value} />
+          {Object.entries(JSONInputData).map(([key, value], i) => (
+            <EditableJSONData
+              key={i}
+              keyData={key}
+              valueData={value}
+              JSONInputData={JSONInputData}
+              setJSONInputData={setJSONInputData}
+            />
           ))}
           <FlexLayout direction="row">
             <p className={cx("bracelet")}>{"]"}</p>
@@ -108,21 +111,31 @@ export const JSONInputBox = ({ propsName = "data", defaultData }: JSONInputBoxPr
           </FlexLayout>
         </>
       )}
-    </JSONDataContext.Provider>
+    </div>
   );
 };
 
 type EditableJSONDataProps = {
   keyData: number | string;
   valueData: object;
+  JSONInputData: object;
+  setJSONInputData: React.Dispatch<
+    React.SetStateAction<{
+      [key: number]: object;
+    }>
+  >;
 };
 
-const EditableJSONData = ({ keyData, valueData }: EditableJSONDataProps) => {
+const EditableJSONData = ({
+  keyData,
+  valueData,
+  JSONInputData,
+  setJSONInputData,
+}: EditableJSONDataProps) => {
   const [isCollapsed, setIsCollapsed] = React.useState(false);
   const [isEditable, setIsEditable] = React.useState(false);
 
   const [JSONData, setJSONData] = React.useState(valueData);
-  const { JSONInputData, setJSONInputData } = React.useContext(JSONDataContext);
 
   const inputKeyRef = React.useRef<HTMLInputElement>(null);
   const inputValueRef = React.useRef<HTMLInputElement>(null);
@@ -175,6 +188,15 @@ const EditableJSONData = ({ keyData, valueData }: EditableJSONDataProps) => {
     };
     updateJSONInputData(updatedJSONData);
   };
+
+  React.useEffect(() => {
+    setJSONData(valueData);
+
+    return () => {
+      setIsCollapsed(false);
+      setIsEditable(false);
+    };
+  }, [valueData]);
 
   return (
     <React.Fragment>

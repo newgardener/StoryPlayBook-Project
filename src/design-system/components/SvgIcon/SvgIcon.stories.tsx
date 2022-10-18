@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { ArrowDown, ArrowToggleDown } from "../../assets/images";
+
 import { type SvgIconProps, SvgIcon } from "./index";
 
 export default {

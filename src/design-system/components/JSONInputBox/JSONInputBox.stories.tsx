@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { Shark } from "../../assets/images";
+
 import { JSONInputBox } from "./index";
 
 export default {
@@ -22,12 +24,21 @@ export const JSON_배열형: StoryObj<typeof JSONInputBox> = {
     propsName: "contents",
     defaultData: [
       {
-        name: "베럴아이",
-        description: "베럴아이 is a deep sea creature",
+        productId: 1,
+        priority: 1,
+        name: "베럴아이 무드등",
+        description: "베럴아이 무드등은 잠을 잘 때 키고 자기 좋은 무드등입니다.",
+        icon: Shark,
+        backgroundColor: "rgba(28, 213, 255, 0.1)",
+        badgeStatus: "NONE",
       },
       {
-        name: "베럴아이2",
-        description: "베럴아이2 is a deep sea creature",
+        productId: 2,
+        priority: 2,
+        name: "베럴아이 잠옷세트\n남녀노소 입기 좋은 아이템",
+        icon: Shark,
+        backgroundColor: "rgba(175, 82, 222, 0.1)",
+        badgeStatus: "NONE",
       },
     ],
   },

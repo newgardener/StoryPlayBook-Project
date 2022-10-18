@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Typography } from "../Typography";
+
 import { FoldingMotion } from "./index";
 
 export default {
