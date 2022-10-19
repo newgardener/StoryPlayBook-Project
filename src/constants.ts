@@ -17,7 +17,7 @@ import {
 import { BUTTON_GROUP, BUTTON_SIZE } from "./design-system/components/Button/types";
 import { InputType } from "./types";
 
-export const componentList: string[] = [
+export const componentNameList: string[] = [
   "Typography",
   "Badge",
   "Button",
@@ -32,18 +32,28 @@ export const componentList: string[] = [
 ];
 
 export const defaultComponentProps: Record<string, object> = {
-  Typography: { tag: "p", fontSize: 24, weight: "bold" } as React.ComponentProps<
-    typeof Typography
-  >,
+  Typography: {
+    tag: "p",
+    color: "#191c20",
+    fontSize: 24,
+    lineHeight: 20,
+    weight: "bold",
+    children: "테스트용 Typography",
+  } as React.ComponentProps<typeof Typography>,
   Badge: {
     type: "count",
     count: 85,
+    label: "",
+    labelColor: "gray",
+    size: "small",
     visible: true,
     children: "뱃지 테스트 텍스트",
   } as React.ComponentProps<typeof Badge>,
-  Button: { children: "테스트 버튼", size: BUTTON_SIZE.MEDIUM } as React.ComponentProps<
-    typeof Button
-  >,
+  Button: {
+    children: "테스트 버튼",
+    size: BUTTON_SIZE.MEDIUM,
+    backgroundColor: "#568203",
+  } as React.ComponentProps<typeof Button>,
   ButtonGroup: {
     buttonGroupType: BUTTON_GROUP.STACKED,
     buttonSize: BUTTON_SIZE.MEDIUM,
