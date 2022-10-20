@@ -1,11 +1,4 @@
-import * as React from "react";
-import classNames from "classnames/bind";
-
 import { RadioButton } from "../../design-system/components";
-
-import styles from "./styles.module.scss";
-
-const cx = classNames.bind(styles);
 
 export type RadioGroupFieldProps = {
   name?: string;
