@@ -1,5 +1,11 @@
 import * as React from "react";
-import { type Control, FieldValues, useController, useForm } from "react-hook-form";
+import {
+  type Control,
+  FieldValues,
+  useController,
+  useForm,
+  useWatch,
+} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames/bind";
 import { z } from "zod";
@@ -35,6 +41,7 @@ import {
 } from "../../design-system/components";
 import { componentSchemaMap } from "../../schema";
 import { InputType } from "../../types";
+import { composeComponentPropsData } from "../../utils";
 import { RadioGroupField } from "../RadioGroupField";
 
 import styles from "./styles.module.scss";
@@ -70,12 +77,17 @@ type ComponentPanelGroupProps = {
 
 const ComponentPanelGroup = ({ componentName }: ComponentPanelGroupProps) => {
   const componentSchema = componentSchemaMap[componentName];
+  const componentPropsNames = Object.keys(defaultComponentProps[componentName]);
 
-  const { control, getValues, setValue, reset } = useForm<
-    z.infer<typeof componentSchema>
-  >({
+  const { control, reset } = useForm<z.infer<typeof componentSchema>>({
     mode: "onChange",
     resolver: zodResolver(componentSchema),
+    defaultValues: defaultComponentProps[componentName],
+  });
+
+  const componentPropsData = useWatch({
+    name: componentPropsNames,
+    control,
   });
 
   React.useEffect(() => {
@@ -84,13 +96,23 @@ const ComponentPanelGroup = ({ componentName }: ComponentPanelGroupProps) => {
 
   return (
     <dd className={cx("component-control-section")}>
-      <ComponentRenderPanel componentName={componentName} />
+      <ComponentRenderPanel
+        componentName={componentName}
+        propsData={composeComponentPropsData(componentPropsNames, componentPropsData)}
+      />
       <ComponentControlPanel componentName={componentName} control={control} />
     </dd>
   );
 };
 
-const ComponentRenderPanel = ({ componentName }: ComponentPanelGroupProps) => {
+type ComponentRenderPanelProps = ComponentPanelGroupProps & {
+  propsData?: object;
+};
+
+const ComponentRenderPanel = ({
+  componentName,
+  propsData,
+}: ComponentRenderPanelProps) => {
   const getComponentToRender = React.useCallback(
     (componentName: string, args?: object) => {
       switch (componentName) {
@@ -134,7 +156,7 @@ const ComponentRenderPanel = ({ componentName }: ComponentPanelGroupProps) => {
           return (
             <JSONInputBox
               {...(defaultComponentProps[componentName] as JSONInputBoxProps)}
-              {...args}
+              // {...args}
             />
           );
         case "DotLoading":
@@ -155,14 +177,14 @@ const ComponentRenderPanel = ({ componentName }: ComponentPanelGroupProps) => {
           return (
             <AccordionCard
               {...(defaultComponentProps[componentName] as AccordionCardProps)}
-              {...args}
+              // {...args}
             />
           );
         case "ProductList":
           return (
             <ProductList
               {...(defaultComponentProps[componentName] as ProductListProps)}
-              {...args}
+              // {...args}
             />
           );
         default:
@@ -174,7 +196,7 @@ const ComponentRenderPanel = ({ componentName }: ComponentPanelGroupProps) => {
 
   return (
     <div className={cx("component-render-panel")}>
-      {getComponentToRender(componentName)}
+      {getComponentToRender(componentName, propsData)}
     </div>
   );
 };
@@ -239,9 +261,6 @@ const ComponentControlForm = ({
     name: fieldName,
     control,
   });
-
-  // console.log(fieldName, fieldType, fieldDefaultValue);
-  console.log(fieldName, field.value);
 
   const getInputFieldComponentByType = ({
     fieldName,
