@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import { isBoolean } from "lodash-es";
 
 import { isStringValue } from "../../assets/utils";
-import { type InputElementProps,InputBase } from "../InputElement";
+import { type InputElementProps, InputBase } from "../InputElement";
 
 import styles from "./styles.module.scss";
 

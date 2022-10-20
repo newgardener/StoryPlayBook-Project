@@ -27,7 +27,87 @@ export const badgeSchema = z.object({
   labelColor: z.union([z.literal("red"), z.literal("blue"), z.literal("gray")]),
 });
 
+export const buttonSchema = z.object({
+  size: z.union([z.literal("small"), z.literal("medium"), z.literal("large")]),
+  backgroundColor: z.string().startsWith("#"),
+  textColor: z.union([z.literal("white"), z.literal("black")]),
+  textBolded: z.boolean(),
+  isLoading: z.boolean(),
+  children: z.string(),
+});
+
+export const buttonGroupSchema = z.object({
+  buttonGroupType: z.union([z.literal("1:1"), z.literal("stacked")]),
+  buttonSize: z.union([z.literal("small"), z.literal("medium"), z.literal("large")]),
+});
+
+export const chipSchema = z.object({
+  active: z.boolean(),
+  label: z.string().min(1),
+});
+
+export const togglerSchema = z.object({
+  checked: z.boolean(),
+});
+
+export const jsonInputBoxSchema = z.object({
+  propsName: z.string().min(1),
+  defaultData: z.array(
+    z.object({
+      name: z.string(),
+      description: z.string(),
+    }),
+  ),
+});
+
+export const dotLoadingSchema = z.object({
+  animation: z.union([
+    z.literal("DOT_ELASTIC"),
+    z.literal("DOT_FLASHING"),
+    z.literal("DOT_TYPING"),
+  ]),
+});
+
+export const foldingMotionSchema = z.object({
+  title: z.string().min(1),
+  content: z.string().min(1),
+});
+
+export const accordionCardSchema = z.object({
+  title: z.string().min(1),
+  subtitle: z.string(),
+  contents: z.array(
+    z.object({
+      name: z.string().min(1),
+      description: z.string(),
+    }),
+  ),
+});
+
+export const productListSchema = z.object({
+  title: z.string().min(1),
+  subtitle: z.string(),
+  products: z.array(
+    z.object({
+      productId: z.number(),
+      priority: z.number(),
+      name: z.string(),
+      description: z.string(),
+      backgroundColor: z.string(),
+    }),
+  ),
+});
+
 export const componentSchemaMap: Record<string, ZodType<any, any, any>> = {
   Typography: typographySchema,
   Badge: badgeSchema,
+  Button: buttonSchema,
+  ButtonGroup: buttonGroupSchema,
+  Chip: chipSchema,
+  Toggler: togglerSchema,
+  JSONInputBox: jsonInputBoxSchema,
+  DotLoading: dotLoadingSchema,
+  FoldingMotion: foldingMotionSchema,
+  AccordionCard: accordionCardSchema,
+  ProductList: productListSchema,
 };

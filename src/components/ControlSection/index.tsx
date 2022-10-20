@@ -246,7 +246,7 @@ const ComponentControlForm = ({
     name: fieldName,
     control,
   });
-  console.log(fieldName, fieldType, fieldDefaultValue);
+  // console.log(fieldName, fieldType, fieldDefaultValue);
   console.log(fieldName, field.value);
 
   const getInputFieldComponentByType = ({
