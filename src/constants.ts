@@ -140,6 +140,7 @@ export const componentPropsTypeMap: Record<string, object> = {
     label: [InputType.TEXT, ""],
     labelColor: [InputType.RADIO, ["red", "blue", "gray"]],
     size: [InputType.RADIO, ["small", "large"]],
+    visible: [InputType.TOGGLE, true],
     children: [InputType.TEXT, "뱃지 테스트 텍스트"],
   },
   Button: {

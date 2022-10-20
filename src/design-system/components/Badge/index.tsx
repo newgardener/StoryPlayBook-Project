@@ -39,29 +39,18 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
         : labelToShow;
     }, []);
 
-    const getBadgeContent = React.useCallback(() => {
-      switch (type) {
-        case "count":
-          return children ? (
-            <span className={cx("type-count", labelColor, { visible })}>
-              {trimCount(count)}
-            </span>
-          ) : null;
-        case "label":
-          return label ? (
-            <span className={cx("type-label", labelColor, size, { visible })}>
-              {trimLabel(label)}
-            </span>
-          ) : null;
-        default:
-          return null;
-      }
-    }, [type]);
-
     return (
       <div className={cx("badge", className)} ref={ref}>
-        {children}
-        {getBadgeContent()}
+        {type === "count" ? children : null}
+        {type === "count" && children ? (
+          <span className={cx("type-count", labelColor, { visible })}>
+            {trimCount(count)}
+          </span>
+        ) : type === "label" && label ? (
+          <span className={cx("type-label", labelColor, size, { visible })}>
+            {trimLabel(label)}
+          </span>
+        ) : null}
       </div>
     );
   },
