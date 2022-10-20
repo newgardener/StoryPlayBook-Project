@@ -61,8 +61,10 @@ export const defaultComponentProps: Record<string, object> = {
     buttonGroupType: BUTTON_GROUP.STACKED,
     buttonSize: BUTTON_SIZE.MEDIUM,
   } as React.ComponentProps<typeof ButtonGroup>,
-  Chip: { label: "테스트용 촉촉한 쿠키칩" } as React.ComponentProps<typeof Chip>,
-  Toggler: {} as React.ComponentProps<typeof Toggler>,
+  Chip: { active: false, label: "테스트용 촉촉한 쿠키칩" } as React.ComponentProps<
+    typeof Chip
+  >,
+  Toggler: { checked: true } as React.ComponentProps<typeof Toggler>,
   JSONInputBox: {
     propsName: "contents",
     defaultData: [

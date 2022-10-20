@@ -1,11 +1,5 @@
 import * as React from "react";
-import {
-  type Control,
-  FieldValues,
-  useController,
-  useForm,
-  useFormState,
-} from "react-hook-form";
+import { type Control, FieldValues, useController, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames/bind";
 import { z } from "zod";
@@ -247,6 +241,7 @@ const ComponentControlForm = ({
     name: fieldName,
     control,
   });
+
   // console.log(fieldName, fieldType, fieldDefaultValue);
   console.log(fieldName, field.value);
 
@@ -269,7 +264,7 @@ const ComponentControlForm = ({
           <InputElement
             name={fieldName}
             value={field.value}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            onChange={(e) => {
               field.onChange(e.target.value);
             }}
           />
@@ -285,7 +280,14 @@ const ComponentControlForm = ({
           </RadioButtonGroup>
         );
       case InputType.TOGGLE:
-        return <Toggler />;
+        return (
+          <Toggler
+            checked={field.value}
+            onChange={(e) => {
+              field.onChange(e.target.checked);
+            }}
+          />
+        );
       default:
         return null;
     }

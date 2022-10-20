@@ -5,6 +5,9 @@ import { Toggler } from "./index";
 export default {
   title: "디자인시스템/컴포넌트/Toggler",
   component: Toggler,
+  args: {
+    checked: true,
+  },
 } as Meta<typeof Toggler>;
 
 export const 기본: StoryObj<typeof Toggler> = {};

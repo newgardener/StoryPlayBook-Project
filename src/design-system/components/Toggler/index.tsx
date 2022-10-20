@@ -8,15 +8,29 @@ const cx = classNames.bind(styles);
 type TogglerProps = {
   checked?: boolean;
   labels?: [string, string];
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const Toggler = ({ checked = false, labels }: TogglerProps) => {
-  const [isChecked, setIsChecked] = React.useState(checked);
+export const Toggler = ({ checked = false, labels, onChange }: TogglerProps) => {
+  const [isChecked, setIsChecked] = React.useState<boolean>(false);
 
-  const toggleButton = () => setIsChecked(!isChecked);
+  const toggleButton = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e);
+    setIsChecked(!isChecked);
+  };
+
+  React.useEffect(() => {
+    setIsChecked(checked);
+  }, [checked]);
 
   return (
-    <div className={cx("toggle-container")} onClick={toggleButton}>
+    <div
+      className={cx("toggle-container", {
+        "toggle-checked": isChecked,
+        "toggle-not-checked": !isChecked,
+      })}
+      onChange={toggleButton}
+    >
       <input
         className={cx("toggle-switch")}
         type="checkbox"
