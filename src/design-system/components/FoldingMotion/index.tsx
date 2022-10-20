@@ -40,7 +40,7 @@ export const FoldingMotion = ({ isOpen = false, title, content }: FoldingMotionP
           <SvgIcon className={cx("icon-arrow")} icon={ArrowDown} theme="gray" />
         </button>
       </dt>
-      <motion.dd
+      <motion.div
         className={cx("folding-motion-content", {
           open: isFoldingOpen,
         })}
@@ -51,7 +51,7 @@ export const FoldingMotion = ({ isOpen = false, title, content }: FoldingMotionP
         }}
       >
         {typeof content === "string" ? <Typography>{content}</Typography> : content}
-      </motion.dd>
+      </motion.div>
     </motion.dl>
   );
 };

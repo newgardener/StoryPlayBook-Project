@@ -62,9 +62,9 @@ export const jsonInputBoxSchema = z.object({
 
 export const dotLoadingSchema = z.object({
   animation: z.union([
-    z.literal("DOT_ELASTIC"),
-    z.literal("DOT_FLASHING"),
-    z.literal("DOT_TYPING"),
+    z.literal("dotElastic"),
+    z.literal("dotFlashing"),
+    z.literal("dotTyping"),
   ]),
 });
 

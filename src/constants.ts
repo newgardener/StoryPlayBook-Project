@@ -78,7 +78,7 @@ export const defaultComponentProps: Record<string, object> = {
       },
     ],
   } as React.ComponentProps<typeof JSONInputBox>,
-  DotLoading: { animation: "DOT_FLASHING" } as React.ComponentProps<typeof DotLoading>,
+  DotLoading: { animation: "dotFlashing" } as React.ComponentProps<typeof DotLoading>,
   FoldingMotion: {
     title: "FoldingMotion 제목",
     content: "FoldingMotion 컨텐츠",
@@ -144,7 +144,7 @@ export const componentPropsTypeMap: Record<string, object> = {
     children: [InputType.TEXT, "뱃지 테스트 텍스트"],
   },
   Button: {
-    size: [InputType.RADIO, ["large", "medium", "small"]],
+    size: [InputType.RADIO, [BUTTON_SIZE.LARGE, BUTTON_SIZE.MEDIUM, BUTTON_SIZE.SMALL]],
     backgroundColor: [InputType.TEXT, "#568203"],
     textColor: [InputType.RADIO, ["white", "black"]],
     textBolded: [InputType.TOGGLE, false],
@@ -152,8 +152,11 @@ export const componentPropsTypeMap: Record<string, object> = {
     children: [InputType.TEXT, "테스트 버튼"],
   },
   ButtonGroup: {
-    buttonGroupType: [InputType.RADIO, ["1:1", "stacked"]],
-    buttonSize: [InputType.RADIO, ["large", "medium", "small"]],
+    buttonGroupType: [InputType.RADIO, [BUTTON_GROUP.ONE_TO_ONE, BUTTON_GROUP.STACKED]],
+    buttonSize: [
+      InputType.RADIO,
+      [BUTTON_SIZE.LARGE, BUTTON_SIZE.MEDIUM, BUTTON_SIZE.SMALL],
+    ],
   },
   Chip: {
     active: [InputType.TOGGLE, false],
@@ -180,7 +183,7 @@ export const componentPropsTypeMap: Record<string, object> = {
     ],
   },
   DotLoading: {
-    animation: [InputType.RADIO, ["DOT_ELASTIC", "DOT_FLASHING", "DOT_TYPING"]],
+    animation: [InputType.RADIO, ["dotElastic", "dotFlashing", "dotTyping"]],
   },
   FoldingMotion: {
     title: [InputType.TEXT, "FoldingMotion 제목"],
