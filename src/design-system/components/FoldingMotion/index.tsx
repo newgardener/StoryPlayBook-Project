@@ -41,7 +41,9 @@ export const FoldingMotion = ({ isOpen = false, title, content }: FoldingMotionP
         </button>
       </dt>
       <motion.dd
-        className={cx("folding-motion-content")}
+        className={cx("folding-motion-content", {
+          open: isFoldingOpen,
+        })}
         transition={{ ease: "easeOut", duration: 0.2 }}
         variants={{
           open: { height: "auto", overflow: "visible" },

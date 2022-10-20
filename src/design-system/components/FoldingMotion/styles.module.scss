@@ -26,6 +26,9 @@
 }
 
 .folding-motion-content {
+  &.open {
+    background-color: #f8f9fa;
+  }
   p {
     padding: 12px 24px 31px;
   }
