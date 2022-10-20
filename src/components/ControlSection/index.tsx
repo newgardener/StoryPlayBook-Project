@@ -1,8 +1,17 @@
 import * as React from "react";
+import {
+  type Control,
+  FieldValues,
+  useController,
+  useForm,
+  useWatch,
+} from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames/bind";
+import { z } from "zod";
 
 import {
-  componentList,
+  componentNameList,
   componentPropsTypeMap,
   defaultComponentProps,
 } from "../../constants";
@@ -27,13 +36,13 @@ import {
   InputElement,
   JSONInputBox,
   ProductList,
-  RadioButtonGroup,
-  RadioButtonInGroup,
-  RadioButtonRowGroup,
   Toggler,
   Typography,
 } from "../../design-system/components";
+import { componentSchemaMap } from "../../schema";
 import { InputType } from "../../types";
+import { composeComponentPropsData } from "../../utils";
+import { RadioGroupField } from "../RadioGroupField";
 
 import styles from "./styles.module.scss";
 
@@ -46,7 +55,7 @@ export const ControlSection = () => {
     <dl className={cx("component-chip-list")}>
       <div className={cx("chips-container")}>
         <div className={cx("component-chip")}>
-          {componentList.map((componentName, index) => (
+          {componentNameList.map((componentName, index) => (
             <dt key={`chip-${index}`}>
               <Chip
                 label={componentName}
@@ -57,19 +66,53 @@ export const ControlSection = () => {
           ))}
         </div>
       </div>
-      <dd className={cx("component-control-section")}>
-        <ComponentRenderPanel componentName={componentList[activeIndex]} />
-        <ComponentControlPanel componentName={componentList[activeIndex]} />
-      </dd>
+      <ComponentPanelGroup componentName={componentNameList[activeIndex]} />
     </dl>
   );
 };
 
-type ComponentRenderPanelProps = {
+type ComponentPanelGroupProps = {
   componentName: string;
 };
 
-const ComponentRenderPanel = ({ componentName }: ComponentRenderPanelProps) => {
+const ComponentPanelGroup = ({ componentName }: ComponentPanelGroupProps) => {
+  const componentSchema = componentSchemaMap[componentName];
+  const componentPropsNames = Object.keys(defaultComponentProps[componentName]);
+
+  const { control, reset } = useForm<z.infer<typeof componentSchema>>({
+    mode: "onChange",
+    resolver: zodResolver(componentSchema),
+    defaultValues: defaultComponentProps[componentName],
+  });
+
+  const componentPropsData = useWatch({
+    name: componentPropsNames,
+    control,
+  });
+
+  React.useEffect(() => {
+    reset(defaultComponentProps[componentName]);
+  }, [componentName]);
+
+  return (
+    <dd className={cx("component-control-section")}>
+      <ComponentRenderPanel
+        componentName={componentName}
+        propsData={composeComponentPropsData(componentPropsNames, componentPropsData)}
+      />
+      <ComponentControlPanel componentName={componentName} control={control} />
+    </dd>
+  );
+};
+
+type ComponentRenderPanelProps = ComponentPanelGroupProps & {
+  propsData?: object;
+};
+
+const ComponentRenderPanel = ({
+  componentName,
+  propsData,
+}: ComponentRenderPanelProps) => {
   const getComponentToRender = React.useCallback(
     (componentName: string, args?: object) => {
       switch (componentName) {
@@ -113,7 +156,7 @@ const ComponentRenderPanel = ({ componentName }: ComponentRenderPanelProps) => {
           return (
             <JSONInputBox
               {...(defaultComponentProps[componentName] as JSONInputBoxProps)}
-              {...args}
+              // {...args}
             />
           );
         case "DotLoading":
@@ -134,14 +177,14 @@ const ComponentRenderPanel = ({ componentName }: ComponentRenderPanelProps) => {
           return (
             <AccordionCard
               {...(defaultComponentProps[componentName] as AccordionCardProps)}
-              {...args}
+              // {...args}
             />
           );
         case "ProductList":
           return (
             <ProductList
               {...(defaultComponentProps[componentName] as ProductListProps)}
-              {...args}
+              // {...args}
             />
           );
         default:
@@ -153,54 +196,21 @@ const ComponentRenderPanel = ({ componentName }: ComponentRenderPanelProps) => {
 
   return (
     <div className={cx("component-render-panel")}>
-      {getComponentToRender(componentName)}
+      {getComponentToRender(componentName, propsData)}
     </div>
   );
 };
 
-type ComponentControlPanelProps = {
-  componentName: string;
-};
-
-const ComponentControlPanel = ({ componentName }: ComponentControlPanelProps) => {
-  const componentInputForm = componentPropsTypeMap[componentName];
-
-  const getInputFieldComponentByType = ({
-    fieldName,
-    fieldType,
-    fieldDefaultValue,
-  }: {
-    fieldName: string;
-    fieldType: string;
-    fieldDefaultValue: string | string[] | object | object[];
-  }) => {
-    switch (fieldType) {
-      case InputType.JSON:
-        return (
-          <JSONInputBox
-            propsName={fieldName}
-            defaultData={fieldDefaultValue as object | object[]}
-          />
-        );
-      case InputType.TEXT:
-      case InputType.NUMBER:
-        return <InputElement value={fieldDefaultValue as string} />;
-      case InputType.RADIO:
-        return (
-          <RadioButtonGroup name={fieldName}>
-            {(fieldDefaultValue as string[]).map((option, index) => (
-              <RadioButtonRowGroup key={`button-row-group-${index}`}>
-                <RadioButtonInGroup>{option}</RadioButtonInGroup>
-              </RadioButtonRowGroup>
-            ))}
-          </RadioButtonGroup>
-        );
-      case InputType.TOGGLE:
-        return <Toggler />;
-      default:
-        return null;
-    }
+type ComponentControlPanelProps<T extends FieldValues = FieldValues> =
+  ComponentPanelGroupProps & {
+    control: Control<T>;
   };
+
+const ComponentControlPanel = ({
+  componentName,
+  control,
+}: ComponentControlPanelProps) => {
+  const componentInputForm = componentPropsTypeMap[componentName];
 
   return (
     <div className={cx("component-control-panel")}>
@@ -221,21 +231,97 @@ const ComponentControlPanel = ({ componentName }: ComponentControlPanelProps) =>
         </thead>
         <tbody>
           {Object.entries(componentInputForm).map(([fieldName, fieldInfo], index) => (
-            <React.Fragment key={`field-${index}`}>
-              <tr>
-                <td>{fieldName}</td>
-                <td>
-                  {getInputFieldComponentByType({
-                    fieldName,
-                    fieldType: fieldInfo[0],
-                    fieldDefaultValue: fieldInfo[1],
-                  })}
-                </td>
-              </tr>
-            </React.Fragment>
+            <ComponentControlForm
+              key={index}
+              control={control}
+              fieldName={fieldName}
+              fieldType={fieldInfo[0]}
+              fieldDefaultValue={fieldInfo[1]}
+            />
           ))}
         </tbody>
       </table>
     </div>
+  );
+};
+
+type ComponentControlFormProps = Pick<ComponentControlPanelProps, "control"> & {
+  fieldName: string;
+  fieldType: string;
+  fieldDefaultValue: string | string[] | object | object[];
+};
+
+const ComponentControlForm = ({
+  control,
+  fieldName,
+  fieldType,
+  fieldDefaultValue,
+}: ComponentControlFormProps) => {
+  const { field } = useController({
+    name: fieldName,
+    control,
+  });
+
+  const getInputFieldComponentByType = ({
+    fieldName,
+    fieldType,
+    fieldDefaultValue,
+  }: Omit<ComponentControlFormProps, "control">) => {
+    switch (fieldType) {
+      case InputType.JSON:
+        return (
+          <JSONInputBox
+            propsName={fieldName}
+            defaultData={fieldDefaultValue as object | object[]}
+          />
+        );
+      case InputType.TEXT:
+      case InputType.NUMBER:
+        return (
+          <InputElement
+            name={fieldName}
+            value={field.value}
+            onChange={(e) => {
+              field.onChange(e.target.value);
+            }}
+          />
+        );
+      case InputType.RADIO:
+        return (
+          <RadioGroupField
+            radioOptions={fieldDefaultValue as string[]}
+            selectedRadioOption={field.value}
+            onChange={(e) => {
+              field.onChange(e.target.value);
+            }}
+          />
+        );
+      case InputType.TOGGLE:
+        return (
+          <Toggler
+            checked={field.value}
+            onChange={(e) => {
+              field.onChange(e.target.checked);
+            }}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <React.Fragment>
+      <tr>
+        <td>{fieldName}</td>
+        <td>
+          {getInputFieldComponentByType({
+            fieldName,
+            fieldType,
+            fieldDefaultValue,
+          })}
+        </td>
+      </tr>
+    </React.Fragment>
   );
 };

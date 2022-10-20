@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@hookform/resolvers": "^2.9.9",
     "classnames": "^2.3.1",
     "framer-motion": "^7.3.5",
     "lodash-es": "^4.17.21",

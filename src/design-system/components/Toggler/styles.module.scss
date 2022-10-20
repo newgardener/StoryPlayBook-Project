@@ -33,18 +33,32 @@ $BORDER_RADIUS: 16px;
     padding: 7px 15px;
   }
 
-  input:not(:checked) ~ span:first-of-type,
-  input:checked ~ span:last-of-type {
-    border-radius: $BORDER_RADIUS;
-    background: #f6f9fc;
-    box-shadow: rgb(0 0 0 / 20%) 0 0 2px;
-    color: #333;
-    padding: 7px 15px;
+  &.toggle-not-checked {
+    span:first-of-type {
+      border-radius: $BORDER_RADIUS;
+      background: #f6f9fc;
+      box-shadow: rgb(0 0 0 / 20%) 0 0 2px;
+      color: #333;
+      padding: 7px 15px;
+    }
+
+    span:last-of-type {
+      color: rgba(51, 51, 51, 0.6);
+      padding: 7px 15px;
+    }
   }
 
-  input:checked ~ span:last-of-type,
-  input:not(:checked) ~ span:first-of-type {
-    color: rgba(51, 51, 51, 0.6);
-    padding: 7px 15px;
+  &.toggle-checked {
+    span:first-of-type {
+      color: rgba(51, 51, 51, 0.6);
+      padding: 7px 15px;
+    }
+    span:last-of-type {
+      border-radius: $BORDER_RADIUS;
+      background: #f6f9fc;
+      box-shadow: rgb(0 0 0 / 20%) 0 0 2px;
+      color: #333;
+      padding: 7px 15px;
+    }
   }
 }

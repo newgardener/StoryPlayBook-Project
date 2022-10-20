@@ -17,7 +17,7 @@ import {
 import { BUTTON_GROUP, BUTTON_SIZE } from "./design-system/components/Button/types";
 import { InputType } from "./types";
 
-export const componentList: string[] = [
+export const componentNameList: string[] = [
   "Typography",
   "Badge",
   "Button",
@@ -32,24 +32,39 @@ export const componentList: string[] = [
 ];
 
 export const defaultComponentProps: Record<string, object> = {
-  Typography: { tag: "p", fontSize: 24, weight: "bold" } as React.ComponentProps<
-    typeof Typography
-  >,
+  Typography: {
+    tag: "p",
+    color: "#191c20",
+    fontSize: 24,
+    lineHeight: 20,
+    weight: "bold",
+    children: "테스트용 Typography",
+  } as React.ComponentProps<typeof Typography>,
   Badge: {
     type: "count",
     count: 85,
+    label: "",
+    labelColor: "gray",
+    size: "small",
     visible: true,
     children: "뱃지 테스트 텍스트",
   } as React.ComponentProps<typeof Badge>,
-  Button: { children: "테스트 버튼", size: BUTTON_SIZE.MEDIUM } as React.ComponentProps<
-    typeof Button
-  >,
+  Button: {
+    size: BUTTON_SIZE.MEDIUM,
+    backgroundColor: "#568203",
+    textColor: "white",
+    textBolded: false,
+    isLoading: false,
+    children: "테스트 버튼",
+  } as React.ComponentProps<typeof Button>,
   ButtonGroup: {
     buttonGroupType: BUTTON_GROUP.STACKED,
     buttonSize: BUTTON_SIZE.MEDIUM,
   } as React.ComponentProps<typeof ButtonGroup>,
-  Chip: { label: "테스트용 촉촉한 쿠키칩" } as React.ComponentProps<typeof Chip>,
-  Toggler: {} as React.ComponentProps<typeof Toggler>,
+  Chip: { active: false, label: "테스트용 촉촉한 쿠키칩" } as React.ComponentProps<
+    typeof Chip
+  >,
+  Toggler: { checked: true } as React.ComponentProps<typeof Toggler>,
   JSONInputBox: {
     propsName: "contents",
     defaultData: [
@@ -63,7 +78,7 @@ export const defaultComponentProps: Record<string, object> = {
       },
     ],
   } as React.ComponentProps<typeof JSONInputBox>,
-  DotLoading: { animation: "DOT_FLASHING" } as React.ComponentProps<typeof DotLoading>,
+  DotLoading: { animation: "dotFlashing" } as React.ComponentProps<typeof DotLoading>,
   FoldingMotion: {
     title: "FoldingMotion 제목",
     content: "FoldingMotion 컨텐츠",
@@ -93,7 +108,6 @@ export const defaultComponentProps: Record<string, object> = {
         priority: 1,
         name: "베럴아이 무드등",
         description: "베럴아이 무드등은 잠을 잘 때 키고 자기 좋은 무드등입니다.",
-        icon: Shark,
         backgroundColor: "rgba(28, 213, 255, 0.1)",
         badgeStatus: "NONE",
       },
@@ -101,7 +115,6 @@ export const defaultComponentProps: Record<string, object> = {
         productId: 2,
         priority: 2,
         name: "베럴아이 잠옷세트\n남녀노소 입기 좋은 아이템",
-        icon: Shark,
         backgroundColor: "rgba(175, 82, 222, 0.1)",
         badgeStatus: "NONE",
       },
@@ -127,10 +140,11 @@ export const componentPropsTypeMap: Record<string, object> = {
     label: [InputType.TEXT, ""],
     labelColor: [InputType.RADIO, ["red", "blue", "gray"]],
     size: [InputType.RADIO, ["small", "large"]],
+    visible: [InputType.TOGGLE, true],
     children: [InputType.TEXT, "뱃지 테스트 텍스트"],
   },
   Button: {
-    size: [InputType.RADIO, ["large", "medium", "small"]],
+    size: [InputType.RADIO, [BUTTON_SIZE.LARGE, BUTTON_SIZE.MEDIUM, BUTTON_SIZE.SMALL]],
     backgroundColor: [InputType.TEXT, "#568203"],
     textColor: [InputType.RADIO, ["white", "black"]],
     textBolded: [InputType.TOGGLE, false],
@@ -138,8 +152,11 @@ export const componentPropsTypeMap: Record<string, object> = {
     children: [InputType.TEXT, "테스트 버튼"],
   },
   ButtonGroup: {
-    buttonGroupType: [InputType.RADIO, ["1:1", "stacked"]],
-    buttonSize: [InputType.RADIO, ["large", "medium", "small"]],
+    buttonGroupType: [InputType.RADIO, [BUTTON_GROUP.ONE_TO_ONE, BUTTON_GROUP.STACKED]],
+    buttonSize: [
+      InputType.RADIO,
+      [BUTTON_SIZE.LARGE, BUTTON_SIZE.MEDIUM, BUTTON_SIZE.SMALL],
+    ],
   },
   Chip: {
     active: [InputType.TOGGLE, false],
@@ -166,7 +183,7 @@ export const componentPropsTypeMap: Record<string, object> = {
     ],
   },
   DotLoading: {
-    animation: [InputType.RADIO, ["DOT_ELASTIC", "DOT_FLASHING", "DOT_TYPING"]],
+    animation: [InputType.RADIO, ["dotElastic", "dotFlashing", "dotTyping"]],
   },
   FoldingMotion: {
     title: [InputType.TEXT, "FoldingMotion 제목"],
