@@ -30,14 +30,12 @@ import {
   InputElement,
   JSONInputBox,
   ProductList,
-  RadioButtonGroup,
-  RadioButtonInGroup,
-  RadioButtonRowGroup,
   Toggler,
   Typography,
 } from "../../design-system/components";
 import { componentSchemaMap } from "../../schema";
 import { InputType } from "../../types";
+import { RadioGroupField } from "../RadioGroupField";
 
 import styles from "./styles.module.scss";
 
@@ -271,13 +269,13 @@ const ComponentControlForm = ({
         );
       case InputType.RADIO:
         return (
-          <RadioButtonGroup name={fieldName}>
-            {(fieldDefaultValue as string[]).map((option, index) => (
-              <RadioButtonRowGroup key={`button-row-group-${index}`}>
-                <RadioButtonInGroup>{option}</RadioButtonInGroup>
-              </RadioButtonRowGroup>
-            ))}
-          </RadioButtonGroup>
+          <RadioGroupField
+            radioOptions={fieldDefaultValue as string[]}
+            selectedRadioOption={field.value}
+            onChange={(e) => {
+              field.onChange(e.target.value);
+            }}
+          />
         );
       case InputType.TOGGLE:
         return (

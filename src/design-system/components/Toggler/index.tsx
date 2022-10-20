@@ -5,7 +5,7 @@ import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
-type TogglerProps = {
+export type TogglerProps = {
   checked?: boolean;
   labels?: [string, string];
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
