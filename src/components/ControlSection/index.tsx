@@ -42,7 +42,7 @@ import {
   Toggler,
   Typography,
 } from "../../design-system/components";
-import { componentSchemaMap, typographySchema } from "../../schema";
+import { componentSchemaMap } from "../../schema";
 import { InputType } from "../../types";
 
 import styles from "./styles.module.scss";
@@ -187,9 +187,10 @@ const ComponentRenderPanel = ({ componentName }: ComponentPanelGroupProps) => {
   );
 };
 
-type ComponentControlPanelProps = ComponentPanelGroupProps & {
-  control: Control;
-};
+type ComponentControlPanelProps<T extends FieldValues = FieldValues> =
+  ComponentPanelGroupProps & {
+    control: Control<T>;
+  };
 
 const ComponentControlPanel = ({
   componentName,
