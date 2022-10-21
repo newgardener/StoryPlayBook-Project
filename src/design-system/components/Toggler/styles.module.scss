@@ -21,6 +21,10 @@ $BORDER_RADIUS: 16px;
     padding: 0;
     cursor: pointer;
     border-radius: $BORDER_RADIUS;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 
   span {

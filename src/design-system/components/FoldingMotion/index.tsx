@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 export interface FoldingMotionProps {
   isOpen?: boolean;
   title: string;
-  content: string | React.ReactNode;
+  content: string;
 }
 
 export const FoldingMotion = ({ isOpen = false, title, content }: FoldingMotionProps) => {
@@ -50,7 +50,7 @@ export const FoldingMotion = ({ isOpen = false, title, content }: FoldingMotionP
           collapsed: { height: 0, overflow: "hidden" },
         }}
       >
-        {typeof content === "string" ? <Typography>{content}</Typography> : content}
+        <Typography>{content}</Typography>
       </motion.div>
     </motion.dl>
   );

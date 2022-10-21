@@ -14,7 +14,7 @@ export interface TypographyProps
   fontSize?: number;
   lineHeight?: number;
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "div" | "span" | "strong" | "b"; // p tag is a default tag
-  children?: React.ReactNode;
+  children?: string;
   className?: string;
 }
 
@@ -36,15 +36,18 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
       return typeof children === "object" ? "div" : tag ? tag : "p";
     }, [children, tag]);
 
-    return React.createElement(
-      elementType,
-      {
-        className: cx("typography", elementType, weight, className),
-        style: { color, fontSize: `${fontSize}px`, lineHeight: `${lineHeight}px` },
-        ref,
-        ...restProps,
-      },
-      children,
-    );
+    if (typeof children === "string") {
+      return React.createElement(
+        elementType,
+        {
+          className: cx("typography", elementType, weight, className),
+          style: { color, fontSize: `${fontSize}px`, lineHeight: `${lineHeight}px` },
+          ref,
+          ...restProps,
+        },
+        children,
+      );
+    }
+    return null;
   },
 );

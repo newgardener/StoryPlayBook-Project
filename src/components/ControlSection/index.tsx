@@ -1,8 +1,5 @@
 import * as React from "react";
 import {
-  type Control,
-  FieldValues,
-  useController,
   useForm,
   useWatch,
 } from "react-hook-form";
@@ -12,37 +9,14 @@ import { z } from "zod";
 
 import {
   componentNameList,
-  componentPropsTypeMap,
   defaultComponentProps,
 } from "../../constants";
-import {
-  type AccordionCardProps,
-  type BadgeProps,
-  type ButtonGroupProps,
-  type ButtonProps,
-  type ChipProps,
-  type DotLoadingProps,
-  type FoldingMotionProps,
-  type JSONInputBoxProps,
-  type ProductListProps,
-  type TypographyProps,
-  AccordionCard,
-  Badge,
-  Button,
-  ButtonGroup,
-  Chip,
-  DotLoading,
-  FoldingMotion,
-  InputElement,
-  JSONInputBox,
-  ProductList,
-  Toggler,
-  Typography,
-} from "../../design-system/components";
+import { Chip } from '../../design-system/components';
 import { componentSchemaMap } from "../../schema";
-import { InputType } from "../../types";
-import { composeComponentPropsData } from "../../utils";
-import { RadioGroupField } from "../RadioGroupField";
+import { composeComponentPropsData } from '../../utils';
+
+import { ComponentControlPanel } from './ComponentControlPanel';
+import { ComponentRenderPanel } from './ComponentRenderPanel';
 
 import styles from "./styles.module.scss";
 
@@ -71,7 +45,7 @@ export const ControlSection = () => {
   );
 };
 
-type ComponentPanelGroupProps = {
+export type ComponentPanelGroupProps = {
   componentName: string;
 };
 
@@ -91,7 +65,10 @@ const ComponentPanelGroup = ({ componentName }: ComponentPanelGroupProps) => {
   });
 
   React.useEffect(() => {
-    reset(defaultComponentProps[componentName]);
+    reset({
+      ...defaultComponentProps[componentName],
+      skeleton: false,
+    });
   }, [componentName]);
 
   return (
@@ -99,229 +76,10 @@ const ComponentPanelGroup = ({ componentName }: ComponentPanelGroupProps) => {
       <ComponentRenderPanel
         componentName={componentName}
         propsData={composeComponentPropsData(componentPropsNames, componentPropsData)}
+        control={control}
       />
       <ComponentControlPanel componentName={componentName} control={control} />
     </dd>
   );
 };
 
-type ComponentRenderPanelProps = ComponentPanelGroupProps & {
-  propsData?: object;
-};
-
-const ComponentRenderPanel = ({
-  componentName,
-  propsData,
-}: ComponentRenderPanelProps) => {
-  const getComponentToRender = React.useCallback(
-    (componentName: string, args?: object) => {
-      switch (componentName) {
-        case "Typography":
-          return (
-            <Typography
-              {...(defaultComponentProps[componentName] as TypographyProps)}
-              {...args}
-            >
-              테스트용 Typography
-            </Typography>
-          );
-        case "Badge":
-          return (
-            <Badge {...(defaultComponentProps[componentName] as BadgeProps)} {...args} />
-          );
-        case "Button":
-          return (
-            <Button
-              {...(defaultComponentProps[componentName] as ButtonProps)}
-              {...args}
-            />
-          );
-        case "ButtonGroup":
-          return (
-            <ButtonGroup
-              {...(defaultComponentProps[componentName] as ButtonGroupProps)}
-              {...args}
-            >
-              <Button size="medium">테스트 버튼 1</Button>
-              <Button size="medium">테스트 버튼 2</Button>
-            </ButtonGroup>
-          );
-        case "Chip":
-          return (
-            <Chip {...(defaultComponentProps[componentName] as ChipProps)} {...args} />
-          );
-        case "Toggler":
-          return <Toggler {...defaultComponentProps[componentName]} {...args} />;
-        case "JSONInputBox":
-          return (
-            <JSONInputBox
-              {...(defaultComponentProps[componentName] as JSONInputBoxProps)}
-              // {...args}
-            />
-          );
-        case "DotLoading":
-          return (
-            <DotLoading
-              {...(defaultComponentProps[componentName] as DotLoadingProps)}
-              {...args}
-            />
-          );
-        case "FoldingMotion":
-          return (
-            <FoldingMotion
-              {...(defaultComponentProps[componentName] as FoldingMotionProps)}
-              {...args}
-            />
-          );
-        case "AccordionCard":
-          return (
-            <AccordionCard
-              {...(defaultComponentProps[componentName] as AccordionCardProps)}
-              // {...args}
-            />
-          );
-        case "ProductList":
-          return (
-            <ProductList
-              {...(defaultComponentProps[componentName] as ProductListProps)}
-              // {...args}
-            />
-          );
-        default:
-          return null;
-      }
-    },
-    [],
-  );
-
-  return (
-    <div className={cx("component-render-panel")}>
-      {getComponentToRender(componentName, propsData)}
-    </div>
-  );
-};
-
-type ComponentControlPanelProps<T extends FieldValues = FieldValues> =
-  ComponentPanelGroupProps & {
-    control: Control<T>;
-  };
-
-const ComponentControlPanel = ({
-  componentName,
-  control,
-}: ComponentControlPanelProps) => {
-  const componentInputForm = componentPropsTypeMap[componentName];
-
-  return (
-    <div className={cx("component-control-panel")}>
-      <table>
-        <colgroup>
-          <col width="25%" />
-          <col width="75%" />
-        </colgroup>
-        <thead>
-          <tr>
-            <th scope="col">
-              <span>Name</span>
-            </th>
-            <th scope="col">
-              <span>Control</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.entries(componentInputForm).map(([fieldName, fieldInfo], index) => (
-            <ComponentControlForm
-              key={index}
-              control={control}
-              fieldName={fieldName}
-              fieldType={fieldInfo[0]}
-              fieldDefaultValue={fieldInfo[1]}
-            />
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
-
-type ComponentControlFormProps = Pick<ComponentControlPanelProps, "control"> & {
-  fieldName: string;
-  fieldType: string;
-  fieldDefaultValue: string | string[] | object | object[];
-};
-
-const ComponentControlForm = ({
-  control,
-  fieldName,
-  fieldType,
-  fieldDefaultValue,
-}: ComponentControlFormProps) => {
-  const { field } = useController({
-    name: fieldName,
-    control,
-  });
-
-  const getInputFieldComponentByType = ({
-    fieldName,
-    fieldType,
-    fieldDefaultValue,
-  }: Omit<ComponentControlFormProps, "control">) => {
-    switch (fieldType) {
-      case InputType.JSON:
-        return (
-          <JSONInputBox
-            propsName={fieldName}
-            defaultData={fieldDefaultValue as object | object[]}
-          />
-        );
-      case InputType.TEXT:
-      case InputType.NUMBER:
-        return (
-          <InputElement
-            name={fieldName}
-            value={field.value}
-            onChange={(e) => {
-              field.onChange(e.target.value);
-            }}
-          />
-        );
-      case InputType.RADIO:
-        return (
-          <RadioGroupField
-            radioOptions={fieldDefaultValue as string[]}
-            selectedRadioOption={field.value}
-            onChange={(e) => {
-              field.onChange(e.target.value);
-            }}
-          />
-        );
-      case InputType.TOGGLE:
-        return (
-          <Toggler
-            checked={field.value}
-            onChange={(e) => {
-              field.onChange(e.target.checked);
-            }}
-          />
-        );
-      default:
-        return null;
-    }
-  };
-
-  return (
-    <React.Fragment>
-      <tr>
-        <td>{fieldName}</td>
-        <td>
-          {getInputFieldComponentByType({
-            fieldName,
-            fieldType,
-            fieldDefaultValue,
-          })}
-        </td>
-      </tr>
-    </React.Fragment>
-  );
-};

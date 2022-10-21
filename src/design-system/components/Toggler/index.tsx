@@ -7,11 +7,17 @@ const cx = classNames.bind(styles);
 
 export type TogglerProps = {
   checked?: boolean;
+  disabled?: boolean;
   labels?: [string, string];
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const Toggler = ({ checked = false, labels, onChange }: TogglerProps) => {
+export const Toggler = ({
+  checked = false,
+  disabled = false,
+  labels,
+  onChange,
+}: TogglerProps) => {
   const [isChecked, setIsChecked] = React.useState<boolean>(false);
 
   const toggleButton = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,6 +43,7 @@ export const Toggler = ({ checked = false, labels, onChange }: TogglerProps) => 
         value={isChecked ? 1 : 0}
         checked={isChecked}
         onChange={toggleButton}
+        disabled={disabled}
       />
       <span>{labels ? labels[0] : "False"}</span>
       <span>{labels ? labels[1] : "True"}</span>

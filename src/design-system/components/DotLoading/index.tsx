@@ -21,13 +21,13 @@ export const DotLoading = ({
   const Dot = () => {
     switch (animation) {
       case "dotElastic":
-        return <div className={cx("dot-elastic")}></div>;
+        return <div className={cx("dot-elastic")} />;
       case "dotFlashing":
-        return <div className={cx("dot-flashing")}></div>;
+        return <div className={cx("dot-flashing")} />;
       case "dotTyping":
-        return <div className={cx("dot-typing")}></div>;
+        return <div className={cx("dot-typing")} />;
       default:
-        return <div className={cx("dot-flashing")}></div>;
+        return <div className={cx("dot-flashing")} />;
     }
   };
 
