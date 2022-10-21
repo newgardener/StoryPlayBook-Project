@@ -80,8 +80,8 @@ export const defaultComponentProps: Record<string, object> = {
   } as React.ComponentProps<typeof JSONInputBox>,
   DotLoading: { animation: "dotFlashing" } as React.ComponentProps<typeof DotLoading>,
   FoldingMotion: {
-    title: "FoldingMotion 제목",
-    content: "FoldingMotion 컨텐츠",
+    title: "제목입니다",
+    content: "콘텐츠입니다",
   } as React.ComponentProps<typeof FoldingMotion>,
   AccordionCard: {
     title: "테스트 아코디언 컴포넌트",
@@ -186,8 +186,8 @@ export const componentPropsTypeMap: Record<string, object> = {
     animation: [InputType.RADIO, ["dotElastic", "dotFlashing", "dotTyping"]],
   },
   FoldingMotion: {
-    title: [InputType.TEXT, "FoldingMotion 제목"],
-    content: [InputType.TEXT, "FoldingMotion 컨텐츠"],
+    title: [InputType.TEXT, "FoldingMotion"],
+    content: [InputType.TEXT, "FoldingMotion"],
   },
   AccordionCard: {
     title: [InputType.TEXT, "테스트 아코디언 컴포넌트"],

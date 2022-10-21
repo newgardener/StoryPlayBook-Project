@@ -50,7 +50,7 @@ export const FoldingMotion = ({ isOpen = false, title, content }: FoldingMotionP
           collapsed: { height: 0, overflow: "hidden" },
         }}
       >
-        {typeof content === "string" ? <Typography>{content}</Typography> : content}
+        <Typography>{content}</Typography>
       </motion.div>
     </motion.dl>
   );
