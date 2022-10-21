@@ -25,7 +25,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public --modern",
     "build-storybook": "build-storybook",
-    "lint": "eslint 'src/**/*.{tsx,ts}' --fix",
+    "lint": "eslint './src/**/*.{tsx,ts}' --fix",
     "type-check": "tsc -p tsconfig.json",
     "format": "prettier --check \"./**/*.{js,ts,tsx,scss,json,html}\"",
     "generate": "node ./scripts/componentFiles.mjs"
@@ -80,7 +80,7 @@
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "5.36.2",
     "babel-loader": "^8.2.5",
-    "eslint": "^8.23.0",
+    "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
