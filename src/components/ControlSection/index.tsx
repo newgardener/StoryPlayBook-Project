@@ -121,9 +121,7 @@ const ComponentRenderPanel = ({
             <Typography
               {...(defaultComponentProps[componentName] as TypographyProps)}
               {...args}
-            >
-              테스트용 Typography
-            </Typography>
+            />
           );
         case "Badge":
           return (

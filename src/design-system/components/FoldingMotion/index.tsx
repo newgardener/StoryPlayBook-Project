@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 export interface FoldingMotionProps {
   isOpen?: boolean;
   title: string;
-  content: string | React.ReactNode;
+  content: string;
 }
 
 export const FoldingMotion = ({ isOpen = false, title, content }: FoldingMotionProps) => {
