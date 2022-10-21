@@ -18,6 +18,7 @@ export const typographySchema = z.object({
   fontSize: z.number(),
   lineHeight: z.number(),
   children: z.string().min(1),
+  skeleton: z.boolean(),
 });
 
 export const badgeSchema = z.object({
@@ -25,6 +26,7 @@ export const badgeSchema = z.object({
   count: z.number(),
   label: z.union([z.string(), z.array(z.string())]),
   labelColor: z.union([z.literal("red"), z.literal("blue"), z.literal("gray")]),
+  skeleton: z.boolean(),
 });
 
 export const buttonSchema = z.object({
@@ -34,20 +36,24 @@ export const buttonSchema = z.object({
   textBolded: z.boolean(),
   isLoading: z.boolean(),
   children: z.string(),
+  skeleton: z.boolean(),
 });
 
 export const buttonGroupSchema = z.object({
   buttonGroupType: z.union([z.literal("1:1"), z.literal("stacked")]),
   buttonSize: z.union([z.literal("small"), z.literal("medium"), z.literal("large")]),
+  skeleton: z.boolean(),
 });
 
 export const chipSchema = z.object({
   active: z.boolean(),
   label: z.string().min(1),
+  skeleton: z.boolean(),
 });
 
 export const togglerSchema = z.object({
   checked: z.boolean(),
+  skeleton: z.boolean(),
 });
 
 export const jsonInputBoxSchema = z.object({
@@ -58,6 +64,7 @@ export const jsonInputBoxSchema = z.object({
       description: z.string(),
     }),
   ),
+  skeleton: z.boolean(),
 });
 
 export const dotLoadingSchema = z.object({
@@ -71,6 +78,7 @@ export const dotLoadingSchema = z.object({
 export const foldingMotionSchema = z.object({
   title: z.string().min(1),
   content: z.string().min(1),
+  skeleton: z.boolean(),
 });
 
 export const accordionCardSchema = z.object({
@@ -82,6 +90,7 @@ export const accordionCardSchema = z.object({
       description: z.string(),
     }),
   ),
+  skeleton: z.boolean(),
 });
 
 export const productListSchema = z.object({
@@ -96,6 +105,7 @@ export const productListSchema = z.object({
       backgroundColor: z.string(),
     }),
   ),
+  skeleton: z.boolean(),
 });
 
 export const componentSchemaMap: Record<string, ZodType<any, any, any>> = {

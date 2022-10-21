@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { Shark } from "./design-system/assets/images";
 import {
   AccordionCard,
   Badge,

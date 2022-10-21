@@ -16,7 +16,7 @@ export interface SkeletonProps
   className?: string;
 }
 
-const BORDER_RADIUS = "16px";
+const BORDER_RADIUS = "32px";
 const HEIGHT = "35px";
 
 export const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(

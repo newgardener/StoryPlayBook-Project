@@ -36,6 +36,8 @@ import {
   InputElement,
   JSONInputBox,
   ProductList,
+  Skeleton,
+  SkeletonToggler,
   Toggler,
   Typography,
 } from "../../design-system/components";
@@ -91,7 +93,10 @@ const ComponentPanelGroup = ({ componentName }: ComponentPanelGroupProps) => {
   });
 
   React.useEffect(() => {
-    reset(defaultComponentProps[componentName]);
+    reset({
+      ...defaultComponentProps[componentName],
+      skeleton: false,
+    });
   }, [componentName]);
 
   return (
@@ -99,20 +104,51 @@ const ComponentPanelGroup = ({ componentName }: ComponentPanelGroupProps) => {
       <ComponentRenderPanel
         componentName={componentName}
         propsData={composeComponentPropsData(componentPropsNames, componentPropsData)}
+        control={control}
       />
       <ComponentControlPanel componentName={componentName} control={control} />
     </dd>
   );
 };
 
-type ComponentRenderPanelProps = ComponentPanelGroupProps & {
-  propsData?: object;
-};
+type ComponentRenderPanelProps<T extends FieldValues = FieldValues> =
+  ComponentPanelGroupProps & {
+    propsData?: object;
+    control: Control<T>;
+  };
 
 const ComponentRenderPanel = ({
   componentName,
   propsData,
+  control,
 }: ComponentRenderPanelProps) => {
+  const isSkeletonOn = useWatch({
+    name: "skeleton",
+    control,
+  });
+
+  const componentSkeletonMap = React.useMemo(() => {
+    return {
+      Typography: <Skeleton width="250px" height="35px" />,
+      Badge: <Skeleton width="150px" height="16px" />,
+      Button: <Skeleton width="105px" height="55px" />,
+      ButtonGroup: (
+        <>
+          <Skeleton width="120px" height="52px" margin="0 0 5px" />
+          <Skeleton width="120px" height="52px" />
+        </>
+      ),
+      Chip: <Skeleton width="150px" height="35px" />,
+      Toggler: <Skeleton width="120px" height="30px" />,
+      JSONInputBox: <Skeleton width="145px" height="100px" />,
+      FoldingMotion: <Skeleton width="135px" height="65px" />,
+      AccordionCard: <Skeleton width="480px" height="225px" />,
+      ProductList: <Skeleton width="464px" height="270px" />,
+    } as {
+      [key: string]: React.ReactNode;
+    };
+  }, []);
+
   const getComponentToRender = React.useCallback(
     (componentName: string, args?: object) => {
       switch (componentName) {
@@ -191,10 +227,13 @@ const ComponentRenderPanel = ({
     },
     [],
   );
-
   return (
     <div className={cx("component-render-panel")}>
-      {getComponentToRender(componentName, propsData)}
+      <SkeletonToggler
+        showSkeleton={isSkeletonOn}
+        children={getComponentToRender(componentName, propsData)}
+        skeleton={componentSkeletonMap[componentName]}
+      />
     </div>
   );
 };
@@ -237,9 +276,29 @@ const ComponentControlPanel = ({
               fieldDefaultValue={fieldInfo[1]}
             />
           ))}
+          {componentName !== "DotLoading" && <CommonControlForm control={control} />}
         </tbody>
       </table>
     </div>
+  );
+};
+
+const CommonControlForm = ({ control }: Pick<ComponentControlPanelProps, "control">) => {
+  const { field } = useController({
+    name: "skeleton",
+    control,
+  });
+
+  return (
+    <tr>
+      <td>
+        <Toggler
+          checked={field.value}
+          labels={["Skeleton Off", "Skeleton On"]}
+          onChange={(e) => field.onChange(e.target.checked)}
+        />
+      </td>
+    </tr>
   );
 };
 
@@ -279,7 +338,7 @@ const ComponentControlForm = ({
           <InputElement
             name={fieldName}
             value={field.value}
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               field.onChange(e.target.value);
             }}
           />
@@ -289,7 +348,7 @@ const ComponentControlForm = ({
           <RadioGroupField
             radioOptions={fieldDefaultValue as string[]}
             selectedRadioOption={field.value}
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               field.onChange(e.target.value);
             }}
           />
@@ -298,7 +357,7 @@ const ComponentControlForm = ({
         return (
           <Toggler
             checked={field.value}
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               field.onChange(e.target.checked);
             }}
           />
