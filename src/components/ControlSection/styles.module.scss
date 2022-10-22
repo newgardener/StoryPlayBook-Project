@@ -28,7 +28,8 @@
   position: relative;
   display: flex;
   box-sizing: border-box;
-  padding: 24px;
+  margin: 24px;
+  max-height: 600px;
 }
 
 .component-render-panel {

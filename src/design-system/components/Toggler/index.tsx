@@ -10,6 +10,7 @@ export type TogglerProps = {
   disabled?: boolean;
   labels?: [string, string];
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 };
 
 export const Toggler = ({
@@ -17,6 +18,7 @@ export const Toggler = ({
   disabled = false,
   labels,
   onChange,
+  className,
 }: TogglerProps) => {
   const [isChecked, setIsChecked] = React.useState<boolean>(false);
 
@@ -31,10 +33,14 @@ export const Toggler = ({
 
   return (
     <div
-      className={cx("toggle-container", {
-        "toggle-checked": isChecked,
-        "toggle-not-checked": !isChecked,
-      })}
+      className={cx(
+        "toggle-container",
+        {
+          "toggle-checked": isChecked,
+          "toggle-not-checked": !isChecked,
+        },
+        className,
+      )}
       onChange={toggleButton}
     >
       <input

@@ -41,7 +41,11 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
         elementType,
         {
           className: cx("typography", elementType, weight, className),
-          style: { color, fontSize: `${fontSize}px`, lineHeight: `${lineHeight}px` },
+          style: {
+            color,
+            fontSize: `${fontSize}px`,
+            lineHeight: `${lineHeight}px`,
+          },
           ref,
           ...restProps,
         },

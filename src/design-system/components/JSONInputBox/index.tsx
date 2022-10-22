@@ -13,6 +13,7 @@ const cx = classNames.bind(styles);
 export interface JSONInputBoxProps {
   propsName?: string;
   defaultData: object | object[];
+  className?: string;
 }
 
 export const JSONInputBox = ({ propsName = "data", defaultData }: JSONInputBoxProps) => {
