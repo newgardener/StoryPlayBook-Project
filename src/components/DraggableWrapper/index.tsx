@@ -45,7 +45,7 @@ const useDrag: (point: UseDrag) => MotionProps = ({ x, y, top, bottom }) => {
       const minBoundedY = css.minBoundingClientTop - top;
       const maxBoundedY = css.maxBoundingClientBottom - bottom;
 
-      if (newPointX < 0 || newPointX > 290) return;
+      if (newPointX < 0 || newPointX > 550) return;
       if (newPointY < minBoundedY || newPointY > maxBoundedY) return;
 
       x.set(x.get() + info.delta.x);
@@ -80,7 +80,10 @@ const DraggableComponentContainer = ({
   y,
 }: DraggableComponentContainerProps) => {
   return (
-    <motion.div style={{ x, y, top: css.padding, left: css.padding }}>
+    <motion.div
+      className={cx("draggable-container")}
+      style={{ x, y, top: css.padding, left: css.padding }}
+    >
       {children}
     </motion.div>
   );

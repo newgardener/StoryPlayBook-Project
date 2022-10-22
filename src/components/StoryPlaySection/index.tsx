@@ -5,11 +5,19 @@ import { componentNameList, defaultComponentProps } from "../../constants";
 import {
   AccordionCard,
   AccordionCardProps,
+  Badge,
+  BadgeProps,
+  Button,
+  ButtonProps,
   Chip,
   FoldingMotion,
   FoldingMotionProps,
   ProductList,
   ProductListProps,
+  Toggler,
+  TogglerProps,
+  Typography,
+  TypographyProps,
 } from "../../design-system/components";
 import { DraggableWrapper } from "../DraggableWrapper";
 
@@ -22,7 +30,7 @@ export const StoryPlaySection = () => {
     <div className={cx("storyplay-wrapper")}>
       <div className={cx("chips-container")}>
         {componentNameList.map((componentName, index) => {
-          if (componentName === "DotLoading") return;
+          if (componentName === "DotLoading" || componentName === "JSONInputBox") return;
           return <Chip key={index} label={componentName} />;
         })}
       </div>
@@ -48,6 +56,38 @@ export const StoryPlaySection = () => {
             <FoldingMotion
               className={cx("story-component")}
               {...(defaultComponentProps["FoldingMotion"] as FoldingMotionProps)}
+            />
+          }
+        />
+        <DraggableWrapper
+          component={
+            <Typography
+              className={cx("story-component")}
+              {...(defaultComponentProps["Typography"] as TypographyProps)}
+            />
+          }
+        />
+        <DraggableWrapper
+          component={
+            <Badge
+              className={cx("story-component")}
+              {...(defaultComponentProps["Badge"] as BadgeProps)}
+            />
+          }
+        />
+        <DraggableWrapper
+          component={
+            <Button
+              className={cx("story-component")}
+              {...(defaultComponentProps["Button"] as ButtonProps)}
+            />
+          }
+        />
+        <DraggableWrapper
+          component={
+            <Toggler
+              className={cx("story-component")}
+              {...(defaultComponentProps["Toggler"] as TogglerProps)}
             />
           }
         />
