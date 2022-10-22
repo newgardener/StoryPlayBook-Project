@@ -14,6 +14,7 @@ import {
   ButtonProps,
   Chip,
   ChipProps,
+  DotLoading,
   FoldingMotion,
   FoldingMotionProps,
   ProductList,
@@ -38,6 +39,7 @@ const schema = z.object({
   FoldingMotion: z.boolean(),
   AccordionCard: z.boolean(),
   ProductList: z.boolean(),
+  isLoading: z.boolean(),
 });
 
 const defaultValues = {
@@ -66,19 +68,27 @@ export const StoryPlaySection = () => {
 
   return (
     <div className={cx("storyplay-wrapper")}>
-      <div className={cx("chips-container")}>
+      <div className={cx("options-container")}>
         {storyComponentNameList.map((componentName, index) => {
           return (
             <Chip
               key={index}
               active={options[componentName]}
               label={componentName}
+              disabled={options.isLoading}
               onClick={() => {
                 setValue(componentName, !getValues(componentName));
               }}
             />
           );
         })}
+        <Toggler
+          className={cx("loading-toggler")}
+          labels={["Not Loading", "Loading..."]}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setValue("isLoading", e.target.checked)
+          }
+        />
       </div>
       <StoryPlayRenderPanel control={control} />
     </div>
@@ -93,6 +103,14 @@ const StoryPlayRenderPanel = ({ control }: StoryPlayRenderPanelProps) => {
   const options = useWatch({
     control,
   });
+
+  if (options.isLoading) {
+    return (
+      <div className={cx("story-render-panel")}>
+        <DotLoading className={cx("story-render-loading")} />
+      </div>
+    );
+  }
 
   return (
     <div className={cx("story-render-panel")}>
