@@ -30,6 +30,26 @@ export const componentNameList: string[] = [
   "ProductList",
 ];
 
+export const storyComponentNameList: (
+  | "Typography"
+  | "Badge"
+  | "Button"
+  | "Chip"
+  | "Toggler"
+  | "FoldingMotion"
+  | "AccordionCard"
+  | "ProductList"
+)[] = [
+  "Typography",
+  "Badge",
+  "Button",
+  "Chip",
+  "Toggler",
+  "FoldingMotion",
+  "AccordionCard",
+  "ProductList",
+];
+
 export const defaultComponentProps: Record<string, object> = {
   Typography: {
     tag: "p",

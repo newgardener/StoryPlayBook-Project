@@ -13,6 +13,8 @@ type Point = {
 
 const css = {
   padding: 16,
+  panelWidth: 700,
+  panelHeight: 812,
   minBoundingClientTop: 125,
   maxBoundingClientBottom: 891,
 };
@@ -37,6 +39,7 @@ const useDrag: (point: UseDrag) => MotionProps = ({ x, y, top, bottom }) => {
     },
     onDragStart: () => {
       isDragging.current = true;
+      y.set(Math.min(y.get(), 550));
     },
     onDrag: (_, info) => {
       const newPointX = x.get() + info.delta.x;
@@ -45,8 +48,14 @@ const useDrag: (point: UseDrag) => MotionProps = ({ x, y, top, bottom }) => {
       const minBoundedY = css.minBoundingClientTop - top;
       const maxBoundedY = css.maxBoundingClientBottom - bottom;
 
-      if (newPointX < 0 || newPointX > 550) return;
-      if (newPointY < minBoundedY || newPointY > maxBoundedY) return;
+      console.log("newPointY", newPointY);
+      console.log("minBoundedY", minBoundedY);
+
+      // TODO: 특정 케이스에 대한 예외 처리 필요 (right, top)
+      // if (newPointX < 0 || newPointX > 550) return;
+      // if (newPointY < minBoundedY || newPointY > maxBoundedY) return;
+
+      if (newPointX < 0) return;
 
       x.set(x.get() + info.delta.x);
       y.set(y.get() + info.delta.y);
@@ -60,7 +69,7 @@ type DraggableWrapperProps = {
 
 export const DraggableWrapper = ({ component }: DraggableWrapperProps) => {
   const x = useMotionValue(0);
-  const y = useMotionValue(10);
+  const y = useMotionValue(0);
   const point = { x, y };
 
   return (

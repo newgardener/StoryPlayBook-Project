@@ -1,7 +1,10 @@
 import * as React from "react";
+import { Control, FieldValues, useForm, useWatch } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames/bind";
+import { z } from "zod";
 
-import { componentNameList, defaultComponentProps } from "../../constants";
+import { defaultComponentProps, storyComponentNameList } from "../../constants";
 import {
   AccordionCard,
   AccordionCardProps,
@@ -10,6 +13,7 @@ import {
   Button,
   ButtonProps,
   Chip,
+  ChipProps,
   FoldingMotion,
   FoldingMotionProps,
   ProductList,
@@ -25,16 +29,74 @@ import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
+const schema = z.object({
+  Typography: z.boolean(),
+  Badge: z.boolean(),
+  Button: z.boolean(),
+  Chip: z.boolean(),
+  Toggler: z.boolean(),
+  FoldingMotion: z.boolean(),
+  AccordionCard: z.boolean(),
+  ProductList: z.boolean(),
+});
+
+const defaultValues = {
+  Typography: false,
+  Badge: false,
+  Button: false,
+  Chip: false,
+  Toggler: false,
+  FoldingMotion: false,
+  AccordionCard: false,
+  ProductList: false,
+};
+
+type FormValues = z.infer<typeof schema>;
+
 export const StoryPlaySection = () => {
+  const { getValues, setValue, control } = useForm<FormValues>({
+    mode: "onChange",
+    resolver: zodResolver(schema),
+    defaultValues,
+  });
+
+  const options = useWatch({
+    control,
+  });
+
   return (
     <div className={cx("storyplay-wrapper")}>
       <div className={cx("chips-container")}>
-        {componentNameList.map((componentName, index) => {
-          if (componentName === "DotLoading" || componentName === "JSONInputBox") return;
-          return <Chip key={index} label={componentName} />;
+        {storyComponentNameList.map((componentName, index) => {
+          return (
+            <Chip
+              key={index}
+              active={options[componentName]}
+              label={componentName}
+              onClick={() => {
+                setValue(componentName, !getValues(componentName));
+              }}
+            />
+          );
         })}
       </div>
-      <div className={cx("story-render-panel")}>
+      <StoryPlayRenderPanel control={control} />
+    </div>
+  );
+};
+
+type StoryPlayRenderPanelProps<T extends FieldValues = FormValues> = {
+  control: Control<T>;
+};
+
+const StoryPlayRenderPanel = ({ control }: StoryPlayRenderPanelProps) => {
+  const options = useWatch({
+    control,
+  });
+
+  return (
+    <div className={cx("story-render-panel")}>
+      {options.AccordionCard && (
         <DraggableWrapper
           component={
             <AccordionCard
@@ -43,14 +105,8 @@ export const StoryPlaySection = () => {
             />
           }
         />
-        <DraggableWrapper
-          component={
-            <ProductList
-              className={cx("story-component")}
-              {...(defaultComponentProps["ProductList"] as ProductListProps)}
-            />
-          }
-        />
+      )}
+      {options.FoldingMotion && (
         <DraggableWrapper
           component={
             <FoldingMotion
@@ -59,6 +115,18 @@ export const StoryPlaySection = () => {
             />
           }
         />
+      )}
+      {options.ProductList && (
+        <DraggableWrapper
+          component={
+            <ProductList
+              className={cx("story-component")}
+              {...(defaultComponentProps["ProductList"] as ProductListProps)}
+            />
+          }
+        />
+      )}
+      {options.Typography && (
         <DraggableWrapper
           component={
             <Typography
@@ -67,6 +135,8 @@ export const StoryPlaySection = () => {
             />
           }
         />
+      )}
+      {options.Badge && (
         <DraggableWrapper
           component={
             <Badge
@@ -75,6 +145,8 @@ export const StoryPlaySection = () => {
             />
           }
         />
+      )}
+      {options.Button && (
         <DraggableWrapper
           component={
             <Button
@@ -83,6 +155,18 @@ export const StoryPlaySection = () => {
             />
           }
         />
+      )}
+      {options.Chip && (
+        <DraggableWrapper
+          component={
+            <Chip
+              className={cx("story-component")}
+              {...(defaultComponentProps["Chip"] as ChipProps)}
+            />
+          }
+        />
+      )}
+      {options.Toggler && (
         <DraggableWrapper
           component={
             <Toggler
@@ -91,7 +175,7 @@ export const StoryPlaySection = () => {
             />
           }
         />
-      </div>
+      )}
     </div>
   );
 };
