@@ -1,10 +1,6 @@
 import * as React from "react";
-import { createPortal } from "react-dom";
 import classNames from "classnames/bind";
 import { motion, MotionProps, MotionValue, useMotionValue } from "framer-motion";
-
-import { defaultComponentProps } from "../../constants";
-import { AccordionCard, AccordionCardProps } from "../../design-system/components";
 
 import styles from "./styles.module.scss";
 
@@ -17,7 +13,7 @@ type Point = {
 
 const css = {
   padding: 16,
-  minBoundingClientTop: 111,
+  minBoundingClientTop: 125,
   maxBoundingClientBottom: 891,
 };
 
@@ -58,14 +54,18 @@ const useDrag: (point: UseDrag) => MotionProps = ({ x, y, top, bottom }) => {
   };
 };
 
-export const DraggableWrapper = () => {
+type DraggableWrapperProps = {
+  component: React.ReactNode;
+};
+
+export const DraggableWrapper = ({ component }: DraggableWrapperProps) => {
   const x = useMotionValue(0);
   const y = useMotionValue(10);
   const point = { x, y };
 
   return (
     <DraggableComponentContainer {...point}>
-      <DraggableComponent {...point} />
+      <DraggableComponent {...point} component={component} />
     </DraggableComponentContainer>
   );
 };
@@ -86,13 +86,16 @@ const DraggableComponentContainer = ({
   );
 };
 
-const DraggableComponent = (point: Point) => {
+type DraggableComponentProps = DraggableWrapperProps & Point;
+
+const DraggableComponent = ({ x, y, component }: DraggableComponentProps) => {
   const [top, setTop] = React.useState(0);
   const [bottom, setBottom] = React.useState(0);
   const componentRef = React.useRef<HTMLDivElement>(null);
 
   const dragProps = useDrag({
-    ...point,
+    x,
+    y,
     top,
     bottom,
   });
@@ -104,9 +107,7 @@ const DraggableComponent = (point: Point) => {
 
   return (
     <motion.div {...dragProps} ref={componentRef}>
-      <AccordionCard
-        {...(defaultComponentProps["AccordionCard"] as AccordionCardProps)}
-      />
+      {component}
     </motion.div>
   );
 };
