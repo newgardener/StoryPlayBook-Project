@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/">
           <Route index element={<Navigate to="/story-playground" replace />} />
-          <Route path="/" element={<TestPlayGround />} />
+          <Route path="/test-playground" element={<TestPlayGround />} />
           <Route path="/story-playground" element={<StoryPlayGround />} />
         </Route>
       </Routes>
