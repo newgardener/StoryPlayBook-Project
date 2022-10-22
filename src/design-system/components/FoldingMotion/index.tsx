@@ -14,16 +14,22 @@ export interface FoldingMotionProps {
   isOpen?: boolean;
   title: string;
   content: string;
+  className?: string;
 }
 
-export const FoldingMotion = ({ isOpen = false, title, content }: FoldingMotionProps) => {
+export const FoldingMotion = ({
+  isOpen = false,
+  title,
+  content,
+  className,
+}: FoldingMotionProps) => {
   const [isFoldingOpen, setIsFoldingOpen] = React.useState(isOpen);
 
   const onClickFoldingMotion = () => setIsFoldingOpen((currentValue) => !currentValue);
 
   return (
     <motion.dl
-      className={cx("folding-motion")}
+      className={cx("folding-motion", className)}
       initial={false}
       animate={isFoldingOpen ? "open" : "collapsed"}
     >
