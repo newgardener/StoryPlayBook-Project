@@ -135,14 +135,14 @@ export const ComponentRenderPanel = ({
           return (
             <AccordionCard
               {...(defaultComponentProps[componentName] as AccordionCardProps)}
-              // {...args}
+              {...args}
             />
           );
         case "ProductList":
           return (
             <ProductList
               {...(defaultComponentProps[componentName] as ProductListProps)}
-              // {...args}
+              {...args}
             />
           );
         default:

@@ -60,10 +60,13 @@ export const AccordionCard = ({
   const [isShowMoreButton, setIsShowMoreButton] = React.useState(false);
 
   const [visible, hidden] = React.useMemo(() => {
+    if (!Array.isArray(contents)) return [[], []];
     return showLimit
       ? [contents.slice(0, showLimit), contents.slice(showLimit)]
       : [contents, []];
   }, [contents, showLimit]);
+
+  if (!Array.isArray(contents)) return null;
 
   return (
     <article className={cx("container", className)}>

@@ -39,6 +39,8 @@ export const ProductList = ({
   isCardType = false,
   className,
 }: ProductListProps) => {
+  if (!Array.isArray(products)) return null;
+
   return (
     <section className={cx("product-list", className, { cardType: isCardType })}>
       <header className={cx("product-header")}>
@@ -52,8 +54,8 @@ export const ProductList = ({
         </Typography>
       </header>
       <ul>
-        {products.map((product) => (
-          <li key={product.productId} className={cx("item")}>
+        {products.map((product, index) => (
+          <li key={product.productId ?? index} className={cx("item")}>
             <div
               className={cx("thumbnail")}
               style={{ background: product.backgroundColor }}
