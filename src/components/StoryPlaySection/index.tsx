@@ -2,9 +2,10 @@ import * as React from "react";
 import { Control, FieldValues, useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames/bind";
+import { useRecoilValue } from "recoil";
 import { z } from "zod";
 
-import { defaultComponentProps, storyComponentNameList } from "../../constants";
+import { storyComponentNameList } from "../../constants";
 import {
   AccordionCard,
   AccordionCardProps,
@@ -24,6 +25,7 @@ import {
   Typography,
   TypographyProps,
 } from "../../design-system/components";
+import { componentPropsState } from "../../store";
 import { DraggableWrapper } from "../DraggableWrapper";
 
 import styles from "./styles.module.scss";
@@ -104,6 +106,8 @@ const StoryPlayRenderPanel = ({ control }: StoryPlayRenderPanelProps) => {
     control,
   });
 
+  const componentProps = useRecoilValue(componentPropsState);
+
   if (options.isLoading) {
     return (
       <div className={cx("story-render-panel")}>
@@ -119,7 +123,7 @@ const StoryPlayRenderPanel = ({ control }: StoryPlayRenderPanelProps) => {
           component={
             <AccordionCard
               className={cx("story-component")}
-              {...(defaultComponentProps["AccordionCard"] as AccordionCardProps)}
+              {...(componentProps["AccordionCard"] as AccordionCardProps)}
             />
           }
         />
@@ -129,7 +133,7 @@ const StoryPlayRenderPanel = ({ control }: StoryPlayRenderPanelProps) => {
           component={
             <FoldingMotion
               className={cx("story-component")}
-              {...(defaultComponentProps["FoldingMotion"] as FoldingMotionProps)}
+              {...(componentProps["FoldingMotion"] as FoldingMotionProps)}
             />
           }
         />
@@ -139,7 +143,7 @@ const StoryPlayRenderPanel = ({ control }: StoryPlayRenderPanelProps) => {
           component={
             <ProductList
               className={cx("story-component")}
-              {...(defaultComponentProps["ProductList"] as ProductListProps)}
+              {...(componentProps["ProductList"] as ProductListProps)}
             />
           }
         />
@@ -149,7 +153,7 @@ const StoryPlayRenderPanel = ({ control }: StoryPlayRenderPanelProps) => {
           component={
             <Typography
               className={cx("story-component")}
-              {...(defaultComponentProps["Typography"] as TypographyProps)}
+              {...(componentProps["Typography"] as TypographyProps)}
             />
           }
         />
@@ -159,7 +163,7 @@ const StoryPlayRenderPanel = ({ control }: StoryPlayRenderPanelProps) => {
           component={
             <Badge
               className={cx("story-component")}
-              {...(defaultComponentProps["Badge"] as BadgeProps)}
+              {...(componentProps["Badge"] as BadgeProps)}
             />
           }
         />
@@ -169,7 +173,7 @@ const StoryPlayRenderPanel = ({ control }: StoryPlayRenderPanelProps) => {
           component={
             <Button
               className={cx("story-component")}
-              {...(defaultComponentProps["Button"] as ButtonProps)}
+              {...(componentProps["Button"] as ButtonProps)}
             />
           }
         />
@@ -179,7 +183,7 @@ const StoryPlayRenderPanel = ({ control }: StoryPlayRenderPanelProps) => {
           component={
             <Chip
               className={cx("story-component")}
-              {...(defaultComponentProps["Chip"] as ChipProps)}
+              {...(componentProps["Chip"] as ChipProps)}
             />
           }
         />
@@ -189,7 +193,7 @@ const StoryPlayRenderPanel = ({ control }: StoryPlayRenderPanelProps) => {
           component={
             <Toggler
               className={cx("story-component")}
-              {...(defaultComponentProps["Toggler"] as TogglerProps)}
+              {...(componentProps["Toggler"] as TogglerProps)}
             />
           }
         />

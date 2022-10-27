@@ -1,8 +1,8 @@
 import * as React from "react";
 import { type Control, FieldValues, useWatch } from "react-hook-form";
 import classNames from "classnames/bind";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-import { defaultComponentProps } from "../../constants";
 import {
   type AccordionCardProps,
   type BadgeProps,
@@ -11,7 +11,6 @@ import {
   type ChipProps,
   type DotLoadingProps,
   type FoldingMotionProps,
-  type JSONInputBoxProps,
   type ProductListProps,
   type TypographyProps,
   AccordionCard,
@@ -21,25 +20,23 @@ import {
   Chip,
   DotLoading,
   FoldingMotion,
-  JSONInputBox,
   ProductList,
   Skeleton,
   SkeletonToggler,
   Toggler,
   Typography,
 } from "../../design-system/components";
-
-import type { ComponentPanelGroupProps } from ".";
+import { componentPropsState } from "../../store";
 
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
-type ComponentRenderPanelProps<T extends FieldValues = FieldValues> =
-  ComponentPanelGroupProps & {
-    propsData?: object;
-    control: Control<T>;
-  };
+type ComponentRenderPanelProps<T extends FieldValues = FieldValues> = {
+  componentName: string;
+  propsData?: object;
+  control: Control<T>;
+};
 
 export const ComponentRenderPanel = ({
   componentName,
@@ -50,6 +47,8 @@ export const ComponentRenderPanel = ({
     name: "skeleton",
     control,
   });
+
+  const [componentProps, setComponentProps] = useRecoilState(componentPropsState);
 
   const componentSkeletonMap = React.useMemo(() => {
     return {
@@ -79,25 +78,18 @@ export const ComponentRenderPanel = ({
         case "Typography":
           return (
             <Typography
-              {...(defaultComponentProps[componentName] as TypographyProps)}
+              {...(componentProps[componentName] as TypographyProps)}
               {...args}
             />
           );
         case "Badge":
-          return (
-            <Badge {...(defaultComponentProps[componentName] as BadgeProps)} {...args} />
-          );
+          return <Badge {...(componentProps[componentName] as BadgeProps)} {...args} />;
         case "Button":
-          return (
-            <Button
-              {...(defaultComponentProps[componentName] as ButtonProps)}
-              {...args}
-            />
-          );
+          return <Button {...(componentProps[componentName] as ButtonProps)} {...args} />;
         case "ButtonGroup":
           return (
             <ButtonGroup
-              {...(defaultComponentProps[componentName] as ButtonGroupProps)}
+              {...(componentProps[componentName] as ButtonGroupProps)}
               {...args}
             >
               <Button size="medium">테스트 버튼 1</Button>
@@ -105,44 +97,35 @@ export const ComponentRenderPanel = ({
             </ButtonGroup>
           );
         case "Chip":
-          return (
-            <Chip {...(defaultComponentProps[componentName] as ChipProps)} {...args} />
-          );
+          return <Chip {...(componentProps[componentName] as ChipProps)} {...args} />;
         case "Toggler":
-          return <Toggler {...defaultComponentProps[componentName]} {...args} />;
-        case "JSONInputBox":
-          return (
-            <JSONInputBox
-              {...(defaultComponentProps[componentName] as JSONInputBoxProps)}
-              // {...args}
-            />
-          );
+          return <Toggler {...componentProps[componentName]} {...args} />;
         case "DotLoading":
           return (
             <DotLoading
-              {...(defaultComponentProps[componentName] as DotLoadingProps)}
+              {...(componentProps[componentName] as DotLoadingProps)}
               {...args}
             />
           );
         case "FoldingMotion":
           return (
             <FoldingMotion
-              {...(defaultComponentProps[componentName] as FoldingMotionProps)}
+              {...(componentProps[componentName] as FoldingMotionProps)}
               {...args}
             />
           );
         case "AccordionCard":
           return (
             <AccordionCard
-              {...(defaultComponentProps[componentName] as AccordionCardProps)}
-              // {...args}
+              {...(componentProps[componentName] as AccordionCardProps)}
+              {...args}
             />
           );
         case "ProductList":
           return (
             <ProductList
-              {...(defaultComponentProps[componentName] as ProductListProps)}
-              // {...args}
+              {...(componentProps[componentName] as ProductListProps)}
+              {...args}
             />
           );
         default:

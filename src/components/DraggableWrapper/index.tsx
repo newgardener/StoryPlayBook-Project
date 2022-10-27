@@ -48,9 +48,6 @@ const useDrag: (point: UseDrag) => MotionProps = ({ x, y, top, bottom }) => {
       const minBoundedY = css.minBoundingClientTop - top;
       const maxBoundedY = css.maxBoundingClientBottom - bottom;
 
-      console.log("newPointY", newPointY);
-      console.log("minBoundedY", minBoundedY);
-
       // TODO: 특정 케이스에 대한 예외 처리 필요 (right, top)
       // if (newPointX < 0 || newPointX > 550) return;
       // if (newPointY < minBoundedY || newPointY > maxBoundedY) return;
