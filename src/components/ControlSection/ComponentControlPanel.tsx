@@ -1,32 +1,20 @@
 import * as React from "react";
-import {
-  type Control,
-  FieldValues,
-  useController,
-} from "react-hook-form";
+import { type Control, FieldValues, useController } from "react-hook-form";
 import classNames from "classnames/bind";
 
-import {
-    componentPropsTypeMap,
-  } from "../../constants";
-import {
-    InputElement,
-    JSONInputBox,
-    Toggler,
-  } from "../../design-system/components";
-  import { InputType } from "../../types";
+import { componentPropsTypeMap } from "../../constants";
+import { InputElement, Toggler } from "../../design-system/components";
+import { InputType } from "../../types";
 import { RadioGroupField } from "../RadioGroupField";
-
-import type { ComponentPanelGroupProps } from '.';
 
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
-type ComponentControlPanelProps<T extends FieldValues = FieldValues> =
-  ComponentPanelGroupProps & {
-    control: Control<T>;
-  };
+type ComponentControlPanelProps<T extends FieldValues = FieldValues> = {
+  componentName: string;
+  control: Control<T>;
+};
 
 export const ComponentControlPanel = ({
   componentName,
@@ -110,13 +98,6 @@ const ComponentControlForm = ({
     fieldDefaultValue,
   }: Omit<ComponentControlFormProps, "control">) => {
     switch (fieldType) {
-      case InputType.JSON:
-        return (
-          <JSONInputBox
-            propsName={fieldName}
-            defaultData={fieldDefaultValue as object | object[]}
-          />
-        );
       case InputType.TEXT:
       case InputType.NUMBER:
         return (

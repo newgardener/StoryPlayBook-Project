@@ -1,62 +1,44 @@
 import * as React from "react";
-import {
-  useForm,
-  useWatch,
-} from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames/bind";
+import { useRecoilState } from "recoil";
 import { z } from "zod";
 
-import {
-  componentNameList,
-  defaultComponentProps,
-} from "../../constants";
-import { Chip } from '../../design-system/components';
+import { componentNameList } from "../../constants";
+import { Chip } from "../../design-system/components";
 import { componentSchemaMap } from "../../schema";
-import { composeComponentPropsData } from '../../utils';
+import { componentPropsState } from "../../store";
+import { composeComponentPropsData } from "../../utils";
 
-import { ComponentControlPanel } from './ComponentControlPanel';
-import { ComponentRenderPanel } from './ComponentRenderPanel';
+import { ComponentControlPanel } from "./ComponentControlPanel";
+import { ComponentRenderPanel } from "./ComponentRenderPanel";
 
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
 export const ControlSection = () => {
-  const [activeIndex, setActiveIndex] = React.useState(0);
-
   return (
     <dl className={cx("component-chip-list")}>
-      <div className={cx("chips-container")}>
-        <div className={cx("component-chip")}>
-          {componentNameList.map((componentName, index) => (
-            <dt key={`chip-${index}`}>
-              <Chip
-                label={componentName}
-                active={activeIndex === index}
-                onClick={() => setActiveIndex(index)}
-              />
-            </dt>
-          ))}
-        </div>
-      </div>
-      <ComponentPanelGroup componentName={componentNameList[activeIndex]} />
+      <ComponentPanelGroup />
     </dl>
   );
 };
 
-export type ComponentPanelGroupProps = {
-  componentName: string;
-};
+const ComponentPanelGroup = () => {
+  const [activeIndex, setActiveIndex] = React.useState(0);
 
-const ComponentPanelGroup = ({ componentName }: ComponentPanelGroupProps) => {
+  const [componentProps, setComponentProps] = useRecoilState(componentPropsState);
+
+  const componentName = componentNameList[activeIndex];
   const componentSchema = componentSchemaMap[componentName];
-  const componentPropsNames = Object.keys(defaultComponentProps[componentName]);
+  const componentPropsNames = Object.keys(componentProps[componentName]);
 
-  const { control, reset } = useForm<z.infer<typeof componentSchema>>({
+  const { control, reset, getValues } = useForm<z.infer<typeof componentSchema>>({
     mode: "onChange",
     resolver: zodResolver(componentSchema),
-    defaultValues: defaultComponentProps[componentName],
+    defaultValues: componentProps[componentName],
   });
 
   const componentPropsData = useWatch({
@@ -66,20 +48,46 @@ const ComponentPanelGroup = ({ componentName }: ComponentPanelGroupProps) => {
 
   React.useEffect(() => {
     reset({
-      ...defaultComponentProps[componentName],
+      ...componentProps[componentName],
       skeleton: false,
     });
+    return () => {
+      setComponentProps({
+        ...componentProps,
+        [componentNameList[activeIndex]]: getValues(),
+      });
+    };
   }, [componentName]);
 
   return (
-    <dd className={cx("component-control-section")}>
-      <ComponentRenderPanel
-        componentName={componentName}
-        propsData={composeComponentPropsData(componentPropsNames, componentPropsData)}
-        control={control}
-      />
-      <ComponentControlPanel componentName={componentName} control={control} />
-    </dd>
+    <>
+      <div className={cx("chips-container")}>
+        <div className={cx("component-chip")}>
+          {componentNameList.map((componentName, index) => (
+            <dt key={`chip-${index}`}>
+              <Chip
+                label={componentName}
+                active={activeIndex === index}
+                onClick={() => {
+                  setComponentProps({
+                    ...componentProps,
+                    [componentNameList[activeIndex]]: getValues(),
+                  });
+                  setActiveIndex(index);
+                }}
+              />
+            </dt>
+          ))}
+        </div>
+      </div>
+      <dd className={cx("component-control-section")}>
+        <ComponentRenderPanel
+          componentName={componentName}
+          propsData={composeComponentPropsData(componentPropsNames, componentPropsData)}
+          control={control}
+        />
+        <ComponentControlPanel componentName={componentName} control={control} />
+      </dd>
+    </>
   );
 };
-
