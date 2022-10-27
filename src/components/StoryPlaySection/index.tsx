@@ -2,7 +2,7 @@ import * as React from "react";
 import { Control, FieldValues, useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames/bind";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { z } from "zod";
 
 import { storyComponentNameList } from "../../constants";
@@ -25,7 +25,7 @@ import {
   Typography,
   TypographyProps,
 } from "../../design-system/components";
-import { componentPropsState } from "../../store";
+import { componentPropsState, storyPlaygroundFormState } from "../../store";
 import { DraggableWrapper } from "../DraggableWrapper";
 
 import styles from "./styles.module.scss";
@@ -44,24 +44,15 @@ const schema = z.object({
   isLoading: z.boolean(),
 });
 
-const defaultValues = {
-  Typography: false,
-  Badge: false,
-  Button: false,
-  Chip: false,
-  Toggler: false,
-  FoldingMotion: false,
-  AccordionCard: false,
-  ProductList: false,
-};
-
 type FormValues = z.infer<typeof schema>;
 
 export const StoryPlaySection = () => {
+  const [formState, setFormState] = useRecoilState(storyPlaygroundFormState);
+
   const { getValues, setValue, control } = useForm<FormValues>({
     mode: "onChange",
     resolver: zodResolver(schema),
-    defaultValues,
+    defaultValues: formState,
   });
 
   const options = useWatch({
@@ -80,6 +71,7 @@ export const StoryPlaySection = () => {
               disabled={options.isLoading}
               onClick={() => {
                 setValue(componentName, !getValues(componentName));
+                setFormState(getValues());
               }}
             />
           );

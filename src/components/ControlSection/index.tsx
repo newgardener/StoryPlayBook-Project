@@ -8,7 +8,7 @@ import { z } from "zod";
 import { componentNameList } from "../../constants";
 import { Chip } from "../../design-system/components";
 import { componentSchemaMap } from "../../schema";
-import { componentPropsState } from "../../store";
+import { activeComponentChipIndex, componentPropsState } from "../../store";
 import { composeComponentPropsData } from "../../utils";
 
 import { ComponentControlPanel } from "./ComponentControlPanel";
@@ -27,8 +27,7 @@ export const ControlSection = () => {
 };
 
 const ComponentPanelGroup = () => {
-  const [activeIndex, setActiveIndex] = React.useState(0);
-
+  const [activeIndex, setActiveIndex] = useRecoilState(activeComponentChipIndex);
   const [componentProps, setComponentProps] = useRecoilState(componentPropsState);
 
   const componentName = componentNameList[activeIndex];
