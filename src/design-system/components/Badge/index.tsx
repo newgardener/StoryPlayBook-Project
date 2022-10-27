@@ -47,9 +47,12 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
             {trimCount(count)}
           </span>
         ) : type === "label" && label ? (
-          <span className={cx("type-label", labelColor, size, { visible })}>
-            {trimLabel(label)}
-          </span>
+          <>
+            {children}
+            <span className={cx("type-label", labelColor, size, { visible })}>
+              {trimLabel(label)}
+            </span>
+          </>
         ) : null}
       </div>
     );

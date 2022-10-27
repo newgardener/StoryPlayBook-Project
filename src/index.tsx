@@ -1,5 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { RecoilRoot } from "recoil";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -7,9 +8,11 @@ import reportWebVitals from "./reportWebVitals";
 const container = document.getElementById("root");
 if (container) {
   createRoot(container).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
+    <RecoilRoot>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </RecoilRoot>,
   );
 }
 

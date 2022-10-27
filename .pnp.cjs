@@ -81,6 +81,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-hook-form", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:7.37.0"],\
             ["react-router-dom", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:6.4.2"],\
             ["react-scripts", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:5.0.1"],\
+            ["recoil", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:0.7.6"],\
             ["sass", "npm:1.54.9"],\
             ["tsconfig-paths-webpack-plugin", "npm:4.0.0"],\
             ["type-fest", "npm:2.19.0"],\
@@ -18385,6 +18386,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["hamt_plus", [\
+        ["npm:1.0.2", {\
+          "packageLocation": "./.yarn/cache/hamt_plus-npm-1.0.2-67a52ee1df-af26ea32db.zip/node_modules/hamt_plus/",\
+          "packageDependencies": [\
+            ["hamt_plus", "npm:1.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["handle-thing", [\
         ["npm:2.0.1", {\
           "packageLocation": "./.yarn/cache/handle-thing-npm-2.0.1-084baca59e-68071f3130.zip/node_modules/handle-thing/",\
@@ -25957,6 +25967,37 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["recoil", [\
+        ["npm:0.7.6", {\
+          "packageLocation": "./.yarn/cache/recoil-npm-0.7.6-6f8de04e3d-2b31dd29a7.zip/node_modules/recoil/",\
+          "packageDependencies": [\
+            ["recoil", "npm:0.7.6"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:0.7.6", {\
+          "packageLocation": "./.yarn/__virtual__/recoil-virtual-4468cf97e4/0/cache/recoil-npm-0.7.6-6f8de04e3d-2b31dd29a7.zip/node_modules/recoil/",\
+          "packageDependencies": [\
+            ["recoil", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:0.7.6"],\
+            ["@types/react", "npm:18.0.17"],\
+            ["@types/react-dom", "npm:18.0.6"],\
+            ["@types/react-native", null],\
+            ["hamt_plus", "npm:1.0.2"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:18.2.0"],\
+            ["react-native", null]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react-native",\
+            "@types/react",\
+            "react-dom",\
+            "react-native",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["recursive-readdir", [\
         ["npm:2.2.2", {\
           "packageLocation": "./.yarn/cache/recursive-readdir-npm-2.2.2-7e64fe65fc-a6b22994d7.zip/node_modules/recursive-readdir/",\
@@ -27468,6 +27509,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-hook-form", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:7.37.0"],\
             ["react-router-dom", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:6.4.2"],\
             ["react-scripts", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:5.0.1"],\
+            ["recoil", "virtual:36024c33d1925bea259583090d3e0724dc09542913e04a9328b116254d9279fb7379b4d4f1f421846bb85ddd122bd2f5dad57e537cb53b9052ebc9f4c529c5d2#npm:0.7.6"],\
             ["sass", "npm:1.54.9"],\
             ["tsconfig-paths-webpack-plugin", "npm:4.0.0"],\
             ["type-fest", "npm:2.19.0"],\

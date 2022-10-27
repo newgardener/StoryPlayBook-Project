@@ -1,41 +1,35 @@
 import * as React from "react";
-import {
-  type Control,
-  FieldValues,
-  useWatch,
-} from "react-hook-form";
+import { type Control, FieldValues, useWatch } from "react-hook-form";
 import classNames from "classnames/bind";
 
+import { defaultComponentProps } from "../../constants";
 import {
-    defaultComponentProps,
-  } from "../../constants";
-import {
-    type AccordionCardProps,
-    type BadgeProps,
-    type ButtonGroupProps,
-    type ButtonProps,
-    type ChipProps,
-    type DotLoadingProps,
-    type FoldingMotionProps,
-    type JSONInputBoxProps,
-    type ProductListProps,
-    type TypographyProps,
-    AccordionCard,
-    Badge,
-    Button,
-    ButtonGroup,
-    Chip,
-    DotLoading,
-    FoldingMotion,
-    JSONInputBox,
-    ProductList,
-    Skeleton,
-    SkeletonToggler,
-    Toggler,
-    Typography,
-  } from "../../design-system/components";
+  type AccordionCardProps,
+  type BadgeProps,
+  type ButtonGroupProps,
+  type ButtonProps,
+  type ChipProps,
+  type DotLoadingProps,
+  type FoldingMotionProps,
+  type JSONInputBoxProps,
+  type ProductListProps,
+  type TypographyProps,
+  AccordionCard,
+  Badge,
+  Button,
+  ButtonGroup,
+  Chip,
+  DotLoading,
+  FoldingMotion,
+  JSONInputBox,
+  ProductList,
+  Skeleton,
+  SkeletonToggler,
+  Toggler,
+  Typography,
+} from "../../design-system/components";
 
-import type { ComponentPanelGroupProps } from '.';
+import type { ComponentPanelGroupProps } from ".";
 
 import styles from "./styles.module.scss";
 
@@ -160,6 +154,9 @@ export const ComponentRenderPanel = ({
   return (
     <div className={cx("component-render-panel")}>
       <SkeletonToggler
+        className={cx({
+          "render-button": componentName === "Button",
+        })}
         showSkeleton={isSkeletonOn}
         children={getComponentToRender(componentName, propsData)}
         skeleton={componentSkeletonMap[componentName]}
