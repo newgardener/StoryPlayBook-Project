@@ -7,7 +7,26 @@ export const playgroundState = atom<"test" | "story">({
   default: "test",
 });
 
+export const activeComponentChipIndex = atom<number>({
+  key: "activeComponentChipIndex",
+  default: 0,
+});
+
 export const componentPropsState = atom<Record<string, object>>({
   key: "componentProps",
   default: defaultComponentProps,
+});
+
+export const storyPlaygroundFormState = atom({
+  key: "storyPlaygroundForm",
+  default: {
+    Typography: false,
+    Badge: false,
+    Button: false,
+    Chip: false,
+    Toggler: false,
+    FoldingMotion: false,
+    AccordionCard: false,
+    ProductList: false,
+  },
 });
