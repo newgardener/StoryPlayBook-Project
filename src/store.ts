@@ -7,6 +7,11 @@ export const playgroundState = atom<"test" | "story">({
   default: "test",
 });
 
+export const activeComponentChipIndex = atom<number>({
+  key: "activeComponentChipIndex",
+  default: 0,
+});
+
 export const componentPropsState = atom<Record<string, object>>({
   key: "componentProps",
   default: defaultComponentProps,
