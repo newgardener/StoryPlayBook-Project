@@ -1,0 +1,103 @@
+@use "colors";
+@use "functions";
+
+/*
+* Common mixins
+*/
+@mixin setProperty($property, $property-value) {
+  #{$property}: $property-value;
+}
+
+/*
+* Button-Related mixins
+*/
+@mixin setDefaultButton {
+  border: none;
+  outline: none;
+  box-shadow: none;
+
+  &:focus,
+  &:active,
+  &:hover {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+@mixin pointerControl {
+  cursor: pointer;
+  user-select: none;
+}
+
+@mixin beforePressDim {
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: none;
+    background-color: rgba(#000000, 0.06);
+    border-color: rgba(#000000, 0.06);
+  }
+}
+
+@mixin afterPressDim {
+  &:before {
+    opacity: 1;
+  }
+}
+
+@mixin buttonPressEffect($scale: 0.95) {
+  transition: transform 0.5s cubic-bezier(0.39, 1.5, 0.41, 0.71);
+  &:active {
+    transform: scale($scale);
+  }
+}
+
+/*
+* Color-Related mixins
+*/
+@mixin setColors($color, $background-color, $border-color) {
+  color: $color;
+  background-color: $background-color;
+  border-color: $border-color;
+}
+
+/*
+* Layout-Related mixins
+*/
+@mixin flexLayout($display, $justify-content, $align-items) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+/*
+* Text-Related mixins
+*/
+@mixin ellipsis($max-line) {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  white-space: nowrap;
+  -webkit-line-clamp: $max-line;
+  -webkit-box-orient: vertical;
+}
+
+/*
+* Color-Related mixins
+*/
+@mixin setIconColorTheme($theme) {
+  $themeColor: functions.getIconColorTheme($theme);
+  @include setProperty("fill", $themeColor);
+}

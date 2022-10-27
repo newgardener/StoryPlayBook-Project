@@ -1,0 +1,26 @@
+.loading-base {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  display: none;
+
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+
+  &.loading {
+    display: flex;
+
+    &.fullSize {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+
+      .loading-wrapper {
+        position: absolute;
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+$SKELETON_LIGHTER: #f8f9fa;
+$SKELETON_LIGHT: #eff2f4;
+$SKELETON_DARK: #25282b;
+
+.skeleton {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background-color: $SKELETON_LIGHT;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+
+    animation: skeletonAnimation 1s infinite;
+
+    background-image: linear-gradient(
+      to left,
+      $SKELETON_LIGHT,
+      $SKELETON_LIGHTER 50%,
+      $SKELETON_LIGHT
+    );
+  }
+}
+
+@keyframes skeletonAnimation {
+  50% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}

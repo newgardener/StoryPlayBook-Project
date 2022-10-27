@@ -1,0 +1,93 @@
+@use "../../assets/styles/mixins";
+
+$BUTTON_TEXT_BLACK: #060b11;
+$BUTTON_TEXT_WHITE: #fff;
+$BORDER_RADIUS: 30px;
+
+.custom-button-wrapper {
+  position: relative;
+  width: 100%;
+  pointer-events: none;
+}
+
+.custom-button {
+  @include mixins.flexLayout(flex, center, center);
+  @include mixins.setDefaultButton;
+  @include mixins.pointerControl;
+  @include mixins.beforePressDim;
+
+  box-sizing: border-box;
+  height: 60px;
+  width: auto;
+  border-radius: $BORDER_RADIUS;
+  font-weight: 400;
+  color: $BUTTON_TEXT_BLACK;
+  opacity: 1;
+
+  &:before {
+    border-radius: $BORDER_RADIUS;
+    z-index: -1;
+  }
+
+  &.large {
+    width: 100%;
+    font-size: 18px;
+    padding: 0 16px;
+
+    &:not(.loading, :disabled) {
+      @include mixins.buttonPressEffect();
+    }
+  }
+
+  &.medium {
+    height: 52px;
+    font-size: 16px;
+    padding: 0 16px;
+
+    &:not(.loading, :disabled) {
+      @include mixins.buttonPressEffect();
+    }
+  }
+
+  &.small {
+    height: 32px;
+    font-size: 16px;
+    padding: 0 20px;
+
+    &:not(.loading, :disabled) {
+      @include mixins.buttonPressEffect();
+    }
+  }
+
+  &.textWhite {
+    color: $BUTTON_TEXT_WHITE;
+  }
+
+  &.textBolded {
+    font-weight: 600;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+  }
+
+  &.loading {
+    @include mixins.afterPressDim;
+    .button-text {
+      opacity: 0;
+    }
+  }
+
+  &.iconLeft {
+    p {
+      margin-left: 5px;
+    }
+  }
+
+  &.iconRight {
+    p {
+      order: -1;
+      margin-right: 5px;
+    }
+  }
+}

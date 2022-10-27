@@ -1,0 +1,197 @@
+$DOT_COLOR: #87929c;
+
+.dot-loading {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+// DOT_ELASTIC
+.dot-elastic {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: $DOT_COLOR;
+  color: $DOT_COLOR;
+  animation: dotElastic 1s infinite linear;
+}
+
+.dot-elastic::before,
+.dot-elastic::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot-elastic::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: $DOT_COLOR;
+  color: $DOT_COLOR;
+  animation: dotElasticBefore 1s infinite linear;
+}
+
+.dot-elastic::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: $DOT_COLOR;
+  color: $DOT_COLOR;
+  animation: dotElasticAfter 1s infinite linear;
+}
+
+@keyframes dotElasticBefore {
+  0% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(1, 1.5);
+  }
+  50% {
+    transform: scale(1, 0.67);
+  }
+  75% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes dotElastic {
+  0% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1, 1.5);
+  }
+  75% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes dotElasticAfter {
+  0% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1, 0.67);
+  }
+  75% {
+    transform: scale(1, 1.5);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+// DOT_FLASHING
+.dot-flashing {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: $DOT_COLOR;
+  color: $DOT_COLOR;
+  animation: dotFlashing 1s infinite linear alternate;
+  animation-delay: 0.5s;
+}
+
+.dot-flashing::before,
+.dot-flashing::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot-flashing::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: $DOT_COLOR;
+  color: $DOT_COLOR;
+  animation: dotFlashing 1s infinite alternate;
+  animation-delay: 0s;
+}
+
+.dot-flashing::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: $DOT_COLOR;
+  color: $DOT_COLOR;
+  animation: dotFlashing 1s infinite alternate;
+  animation-delay: 1s;
+}
+
+@keyframes dotFlashing {
+  0% {
+    background-color: $DOT_COLOR;
+  }
+  50%,
+  100% {
+    background-color: #ebe6ff;
+  }
+}
+
+// DOT_TYPING
+.dot-typing {
+  position: relative;
+  left: -9999px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: $DOT_COLOR;
+  color: $DOT_COLOR;
+  box-shadow: 9984px 0 0 0 $DOT_COLOR, 9999px 0 0 0 $DOT_COLOR, 10014px 0 0 0 $DOT_COLOR;
+  animation: dotTyping 1.5s infinite linear;
+}
+
+@keyframes dotTyping {
+  0% {
+    box-shadow: 9984px 0 0 0 $DOT_COLOR, 9999px 0 0 0 $DOT_COLOR, 10014px 0 0 0 $DOT_COLOR;
+  }
+  15% {
+    box-shadow: 9984px -10px 0 0 $DOT_COLOR, 9999px 0 0 0 $DOT_COLOR,
+      10014px 0 0 0 $DOT_COLOR;
+  }
+  35% {
+    box-shadow: 9984px 0 0 0 $DOT_COLOR, 9999px 0 0 0 $DOT_COLOR, 10014px 0 0 0 $DOT_COLOR;
+  }
+  50% {
+    box-shadow: 9984px 0 0 0 $DOT_COLOR, 9999px -10px 0 0 $DOT_COLOR,
+      10014px 0 0 0 $DOT_COLOR;
+  }
+  65% {
+    box-shadow: 9984px 0 0 0 $DOT_COLOR, 9999px 0 0 0 $DOT_COLOR, 10014px 0 0 0 $DOT_COLOR;
+  }
+  85% {
+    box-shadow: 9984px 0 0 0 $DOT_COLOR, 9999px 0 0 0 $DOT_COLOR,
+      10014px -10px 0 0 $DOT_COLOR;
+  }
+  100% {
+    box-shadow: 9984px 0 0 0 $DOT_COLOR, 9999px 0 0 0 $DOT_COLOR, 10014px 0 0 0 $DOT_COLOR;
+  }
+}

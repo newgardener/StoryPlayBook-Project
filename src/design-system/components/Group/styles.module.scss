@@ -1,0 +1,15 @@
+.group {
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+
+  &.row {
+    flex-direction: row;
+    height: 100%;
+  }
+
+  &.column {
+    width: 100%;
+    flex-direction: column;
+  }
+}

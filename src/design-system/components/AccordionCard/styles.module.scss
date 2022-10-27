@@ -1,0 +1,51 @@
+$BACKGROUND_COLOR: #f8f9fa;
+$BULLET_COLOR: #3a3e42;
+
+.container {
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: $BACKGROUND_COLOR;
+  padding: 24px 0;
+
+  .content-header {
+    margin-bottom: 24px;
+    h3,
+    h5 {
+      margin: 0 24px;
+    }
+  }
+
+  .show-more-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto 0;
+
+    &.rotate-arrow {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+.content {
+  padding: 8px 24px;
+
+  .index {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto;
+    width: 30px;
+    height: 30px;
+    border: 2px solid;
+    border-radius: 30px;
+    border-color: $BULLET_COLOR;
+    color: $BULLET_COLOR;
+  }
+
+  .card-item {
+    margin-left: 12px;
+  }
+}

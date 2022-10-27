@@ -1,0 +1,32 @@
+@mixin input-text-style {
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+.input-element {
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  outline: none;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  padding: 5px;
+
+  @include input-text-style;
+  color: rgb(6, 11, 17);
+
+  &:focus {
+    border: 1px solid rgb(30, 167, 253);
+  }
+
+  &:disabled {
+    border: 1px solid gray;
+    opacity: 0.6;
+  }
+}
+
+.input-element::placeholder {
+  @include input-text-style;
+  color: rgba(6, 11, 17, 0.24);
+}
